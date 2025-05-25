@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Questions - EduQuiz</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styles spécifiques pour la gestion des questions */
+        .questions-management {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 80px 0 40px;
+        }
+
+        .questions-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .question-form-card, .questions-list-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .difficulty-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .difficulty-option {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .difficulty-radio {
+            display: none;
+        }
+
+        .difficulty-label {
+            display: block;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .difficulty-radio:checked + .difficulty-label {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .difficulty-label.facile {
+            background-color: rgba(76, 175, 80, 0.1);
+            border-color: #4CAF50;
+        }
+
+        .difficulty-label.moyen {
+            background-color: rgba(255, 193, 7, 0.1);
+            border-color: #FFC107;
+        }
+
+        .difficulty-label.difficile {
+            background-color: rgba(244, 67, 54, 0.1);
+            border-color: #F44336;
+        }
+
+        .answer-options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .answer-option:hover {
+            border-color: #667eea;
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+
+        .answer-radio {
+            width: 20px;
+            height: 20px;
+            accent-color: #667eea;
+        }
+
+        .answer-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background: transparent;
+        }
+
+        .answer-input::placeholder {
+            color: #999;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #555;
+            border: 2px solid #e1e5e9;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+        }
+
+        .questions-list {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .question-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .question-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .question-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .question-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .btn-edit {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .search-filter {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-input {
+            flex: 2;
+            min-width: 200px;
+        }
+
+        .filter-select {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        @media (max-width: 768px) {
+            .management-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .difficulty-selector {
+                flex-direction: column;
+            }
+            
+            .search-filter {
+                flex-direction: column;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+
+        .floating-add-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-add-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">🎓 EduQuiz</a>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">🏠 Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="a_propos.html" class="nav-link">📖 À propos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#fonctionnalites" class="nav-link">
+                        ⚙️ Fonctionnalités <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#gestion-classes" class="dropdown-item">👥 Gestion des classes</a>
+                        <a href="gestion_questions.html" class="dropdown-item active">❓ Gestion des questions</a>
+                        <a href="#gestion-matieres" class="dropdown-item">📚 Gestion des matières</a>
+                        <a href="#gestion-utilisateurs" class="dropdown-item">👤 Gestion des utilisateurs</a>
+                        <a href="#statistiques" class="dropdown-item">📊 Statistiques</a>
+                        <a href="#parametres" class="dropdown-item">⚙️ Paramètres</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">📧 Contact</a>
+                </li>
+            </ul>
+            
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span id="menu-icon">☰</span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-nav-menu">
+            <a href="index.html" class="mobile-nav-link" onclick="closeMobileMenu()">🏠 Accueil</a>
+            <a href="a_propos.html" class="mobile-nav-link" onclick="closeMobileMenu()">📖 À propos</a>
+            <a href="#" class="mobile-nav-link" onclick="toggleMobileDropdown()">⚙️ Fonctionnalités ▼</a>
+            <div class="mobile-dropdown" id="mobile-dropdown">
+                <a href="#gestion-classes" class="mobile-dropdown-item" onclick="closeMobileMenu()">👥 Gestion des classes</a>
+                <a href="gestion_questions.html" class="mobile-dropdown-item active" onclick="closeMobileMenu()">❓ Gestion des questions</a>
+                <a href="#gestion-matieres" class="mobile-dropdown-item" onclick="closeMobileMenu()">📚 Gestion des matières</a>
+                <a href="#gestion-utilisateurs" class="mobile-dropdown-item" onclick="closeMobileMenu()">👤 Gestion des utilisateurs</a>
+                <a href="#statistiques" class="mobile-dropdown-item" onclick="closeMobileMenu()">📊 Statistiques</a>
+                <a href="#parametres" class="mobile-dropdown-item" onclick="closeMobileMenu()">⚙️ Paramètres</a>
+            </div>
+            <a href="contact.html" class="mobile-nav-link" onclick="closeMobileMenu()">📧 Contact</a>
+        </div>
+    </div>
+
+    <div class="stars" id="stars"></div>
+
+    <main class="questions-management">
+        <div class="questions-container">
+            <div class="page-header">
+                <h1 class="page-title">❓ Gestion des Questions</h1>
+                <p class="page-subtitle">Créez et organisez vos questions d'évaluation</p>
+            </div>
+
+            <div class="stats-overview">
+                <div class="stat-item">
+                    <div class="stat-number" id="total-questions">247</div>
+                    <div class="stat-label">Questions créées</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="subjects-covered">8</div>
+                    <div class="stat-label">Matières couvertes</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="difficulty-balance">60%</div>
+                    <div class="stat-label">Niveau moyen</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="recent-questions">12</div>
+                    <div class="stat-label">Cette semaine</div>
+                </div>
+            </div>
+
+            <div class="management-grid">
+                <div class="question-form-card">
+                    <h2 class="card-title">➕ Nouvelle Question</h2>
+                    
+                    <form id="question-form">
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Matière</label>
+                            <select class="form-select" id="subject" required>
+                                <option value="">Sélectionnez une matière</option>
+                                <option value="mathematiques">Mathématiques</option>
+                                <option value="francais">Français</option>
+                                <option value="histoire">Histoire</option>
+                                <option value="geographie">Géographie</option>
+                                <option value="sciences">Sciences</option>
+                                <option value="philosophie">Philosophie</option>
+                                <option value="economie">Économie</option>
+                                <option value="anglais">Anglais</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="level">Niveau d'étude</label>
+                            <select class="form-select" id="level" required>
+                                <option value="">Sélectionnez un niveau</option>
+                                <option value="licence1">Licence 1</option>
+                                <option value="licence2">Licence 2</option>
+                                <option value="licence3">Licence 3</option>
+                                <option value="master1">Master 1</option>
+                                <option value="master2">Master 2</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="question-text">Question</label>
+                            <textarea class="form-textarea" id="question-text" placeholder="Saisissez votre question ici..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Degré de difficulté</label>
+                            <div class="difficulty-selector">
+                                <div class="difficulty-option">
+                                    <input type="radio" class="difficulty-radio" id="facile" name="difficulty" value="facile" required>
+                                    <label class="difficulty-label facile" for="facile">😊 Facile</label>
+                                </div>
+                                <div class="difficulty-option">
+                                    <input type="radio" class="difficulty-radio" id="moyen" name="difficulty" value="moyen" required>
+                                    <label class="difficulty-label moyen" for="moyen">🤔 Moyen</label>
+                                </div>
+                                <div class="difficulty-option">
+                                    <input type="radio" class="difficulty-radio" id="difficile" name="difficulty" value="difficile" required>
+                                    <label class="difficulty-label difficile" for="difficile">🔥 Difficile</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Options de réponse</label>
+                            <div class="answer-options">
+                                <div class="answer-option">
+                                    <input type="radio" class="answer-radio" name="correct-answer" value="0" required>
+                                    <input type="text" class="answer-input" placeholder="Option A" required>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" class="answer-radio" name="correct-answer" value="1" required>
+                                    <input type="text" class="answer-input" placeholder="Option B" required>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" class="answer-radio" name="correct-answer" value="2" required>
+                                    <input type="text" class="answer-input" placeholder="Option C" required>
+                                </div>
+                                <div class="answer-option">
+                                    <input type="radio" class="answer-radio" name="correct-answer" value="3" required>
+                                    <input type="text" class="answer-input" placeholder="Option D" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="explanation">Explication (optionnel)</label>
+                            <textarea class="form-textarea" id="explanation" placeholder="Expliquez pourquoi cette réponse est correcte..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">💾 Enregistrer</button>
+                            <button type="reset" class="btn btn-secondary">🔄 Réinitialiser</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="questions-list-card">
+                    <h2 class="card-title">📋 Mes Questions</h2>
+                    
+                    <div class="search-filter">
+                        <input type="text" class="form-input search-input" placeholder="🔍 Rechercher une question..." id="search-input">
+                        <select class="form-select filter-select" id="filter-subject">
+                            <option value="">Toutes les matières</option>
+                            <option value="mathematiques">Mathématiques</option>
+                            <option value="francais">Français</option>
+                            <option value="histoire">Histoire</option>
+                            <option value="geographie">Géographie</option>
+                            <option value="sciences">Sciences</option>
+                        </select>
+                        <select class="form-select filter-select" id="filter-difficulty">
+                            <option value="">Toutes difficultés</option>
+                            <option value="facile">Facile</option>
+                            <option value="moyen">Moyen</option>
+                            <option value="difficile">Difficile</option>
+                        </select>
+                    </div>
+
+                    <div class="questions-list" id="questions-list">
+                        <div class="question-item">
+                            <div class="question-text">Quelle est la capitale du Sénégal ?</div>
+                            <div class="question-meta">
+                                <span>📚 Géographie</span>
+                                <span>🎓 Licence 1</span>
+                                <span>😊 Facile</span>
+                                <span>📅 Il y a 2 jours</span>
+                            </div>
+                            <div class="question-actions">
+                                <button class="btn btn-small btn-edit" onclick="editQuestion(1)">✏️ Modifier</button>
+                                <button class="btn btn-small btn-delete" onclick="deleteQuestion(1)">🗑️ Supprimer</button>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <div class="question-text">Qui a écrit "L'Étranger" ?</div>
+                            <div class="question-meta">
+                                <span>📖 Français</span>
+                                <span>🎓 Licence 2</span>
+                                <span>🤔 Moyen</span>
+                                <span>📅 Il y a 5 jours</span>
+                            </div>
+                            <div class="question-actions">
+                                <button class="btn btn-small btn-edit" onclick="editQuestion(2)">✏️ Modifier</button>
+                                <button class="btn btn-small btn-delete" onclick="deleteQuestion(2)">🗑️ Supprimer</button>
+                            </div>
+                        </div>
+
+                        <div class="question-item">
+                            <div class="question-text">Expliquez le concept de la négritude selon Léopold Sédar Senghor</div>
+                            <div class="question-meta">
+                                <span>🧠 Philosophie</span>
+                                <span>🎓 Master 1</span>
+                                <span>🔥 Difficile</span>
+                                <span>📅 Il y a 1 semaine</span>
+                            </div>
+                            <div class="question-actions">
+                                <button class="btn btn-small btn-edit" onclick="editQuestion(3)">✏️ Modifier</button>
+                                <button class="btn btn-small btn-delete" onclick="deleteQuestion(3)">🗑️ Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="floating-add-btn" onclick="scrollToForm()" title="Ajouter une nouvelle question">
+        ➕
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Gestion du formulaire de question
+        document.getElementById('question-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupération des données du formulaire
+            const formData = new FormData(e.target);
+            const questionData = {
+                subject: formData.get('subject'),
+                level: formData.get('level'),
+                question: document.getElementById('question-text').value,
+                difficulty: formData.get('difficulty'),
+                answers: [],
+                correctAnswer: parseInt(formData.get('correct-answer')),
+                explanation: document.getElementById('explanation').value
+            };
+            
+            // Récupération des options de réponse
+            const answerInputs = document.querySelectorAll('.answer-input');
+            answerInputs.forEach(input => {
+                questionData.answers.push(input.value);
+            });
+            
+            // Simulation de l'enregistrement
+            console.log('Question enregistrée:', questionData);
+            
+            // Affichage d'un message de succès
+            alert('✅ Question enregistrée avec succès !');
+            
+            // Réinitialisation du formulaire
+            e.target.reset();
+            
+            // Mise à jour des statistiques
+            updateStats();
+        });
+        
+        // Fonction pour faire défiler vers le formulaire
+        function scrollToForm() {
+            document.querySelector('.question-form-card').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Fonction pour modifier une question
+        function editQuestion(id) {
+            alert(`Modification de la question ${id} (fonctionnalité à implémenter)`);
+        }
+        
+        // Fonction pour supprimer une question
+        function deleteQuestion(id) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette question ?')) {
+                alert(`Question ${id} supprimée (fonctionnalité à implémenter)`);
+                updateStats();
+            }
+        }
+        
+        // Fonction pour mettre à jour les statistiques
+        function updateStats() {
+            // Simulation de mise à jour des statistiques
+            const totalQuestions = document.getElementById('total-questions');
+            const currentCount = parseInt(totalQuestions.textContent);
+            totalQuestions.textContent = currentCount + 1;
+        }
+        
+        // Recherche et filtrage
+        document.getElementById('search-input').addEventListener('input', filterQuestions);
+        document.getElementById('filter-subject').addEventListener('change', filterQuestions);
+        document.getElementById('filter-difficulty').addEventListener('change', filterQuestions);
+        
+        function filterQuestions() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const subjectFilter = document.getElementById('filter-subject').value;
+            const difficultyFilter = document.getElementById('filter-difficulty').value;
+            
+            const questionItems = document.querySelectorAll('.question-item');
+            
+            questionItems.forEach(item => {
+                const questionText = item.querySelector('.question-text').textContent.toLowerCase();
+                const questionMeta = item.querySelector('.question-meta').textContent.toLowerCase();
+                
+                const matchesSearch = questionText.includes(searchTerm);
+                const matchesSubject = !subjectFilter || questionMeta.includes(subjectFilter);
+                const matchesDifficulty = !difficultyFilter || questionMeta.includes(difficultyFilter);
+                
+                if (matchesSearch && matchesSubject && matchesDifficulty) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

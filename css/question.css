@@ -1,0 +1,221 @@
+
+/* CSS Responsive pour le formulaire d'ajout de questions */
+
+.add_question {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    max-width: 650px;
+    background: linear-gradient(135deg, #93a5fc 0%, #dbb9fd 100%);
+    color: black;
+    font-weight: bold;
+    z-index: 3;
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.add_question h3 {
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    color: #000000;
+}
+
+.add_question label {
+    display: block;
+    text-align: left;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    color: #000000;
+}
+
+.add_question_conteneur {
+    width: 100%;
+    text-align: justify;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.add_question_conteneur div {
+    width: 100%;
+    display: block;
+    margin: 0;
+}
+
+.add_question_conteneur select,
+.add_question textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Intitulé de la question (pleine largeur) */
+#intitule {
+    grid-column: 1 / -1;
+    min-height: 60px;
+}
+
+
+/* Media Queries pour la responsivité */
+
+/* Tablettes (768px et moins) */
+@media screen and (max-width: 768px) {
+    .add_question {
+        width: 95%;
+        padding: 15px;
+        margin: 10px auto;
+    }
+    
+    .add_question h3 {
+        font-size: 1.3rem;
+        margin-bottom: 20px;
+    }
+    
+    .add_question_conteneur {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin: 15px 0;
+    }
+    
+    .filter-input {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+    
+    .filter-select {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+    
+    #intitule {
+        min-height: 50px;
+    }
+    
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1rem;
+        margin-top: 15px;
+    }
+}
+
+/* Smartphones (480px et moins) */
+@media screen and (max-width: 480px) {
+    .add_question {
+        width: 98%;
+        padding: 12px;
+        border-radius: 12px;
+    }
+    
+    .add_question h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .add_question label {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+    
+    .add_question_conteneur {
+        gap: 10px;
+        margin: 12px 0;
+    }
+    
+    .filter-input {
+        padding: 8px;
+        font-size: 0.9rem;
+        border-radius: 6px;
+    }
+    
+    .filter-select {
+        padding: 8px;
+        font-size: 0.9rem;
+        border-radius: 6px;
+    }
+    
+    #intitule {
+        min-height: 45px;
+    }
+    
+    .cta-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 0.95rem;
+        border-radius: 20px;
+        margin-top: 12px;
+    }
+}
+
+/* Très petits écrans (360px et moins) */
+@media screen and (max-width: 360px) {
+    .add_question {
+        width: 100%;
+        margin: 5px auto;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    
+    .add_question h3 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+    
+    .add_question label {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+    
+    .filter-input,
+    .filter-select {
+        padding: 6px;
+        font-size: 0.85rem;
+    }
+    
+    #intitule {
+        min-height: 40px;
+    }
+    
+    .cta-button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Améliorations supplémentaires pour l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+    .add_question,
+    .filter-input,
+    .filter-select,
+    .cta-button {
+        transition: none;
+    }
+}
+
+.submit-green-check {
+    position: relative;
+    padding-left: 30px;
+}
+
+.submit-green-check::before {
+    content: "✔";
+    color: #22c55e;
+    font-weight: bold;
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+/* 
+.add_question {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+Personnalisation de la barre de défilement
+.add_question::-webkit-scrollbar {
+    width: 8px;
+}
+*/

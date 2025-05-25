@@ -1,0 +1,165 @@
+body{
+    background-color: rgba(3, 0, 40, 0.5);
+    color: white;
+    width: 850px;
+    margin: 0 auto;
+    overflow: hidden;
+    
+}
+
+.drap{
+    position: absolute;
+    width: 350px;
+    padding-bottom: 100%;
+    padding-top: 50px;
+    margin-top: -50px;
+    background-color: rgba(3, 0, 40, 0.5);
+    display: none;
+    overflow: hidden;
+}
+
+.user_form{
+    width: 250px;
+    height: 180px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 20px;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    font-weight: bolder;
+    border-radius: 10px;
+    margin-left: 50px;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    font-weight: bolder;
+}
+
+.h3{
+    width: 300px;
+    height: 30px;
+    background-color: rgb(0, 20, 37);
+    padding-left: 10px;
+    margin: 0 auto;
+    margin-left: -2px;
+    overflow: hidden;
+}
+
+.h3:hover{
+    cursor: grab;
+    background-color: rgb(6, 6, 128);
+    padding-left: 20px;
+    transition: 0.3s;
+}
+
+.p{
+    background-color: rgba(255, 255, 255, 0.5);
+    color: black;
+    width: 300px;
+    height: 40px;
+    margin-top: -10px;
+    padding-top: 5px;
+    padding-left: 10px;
+    margin: 0 auto;
+    margin-left: 0px;
+}
+
+.nav_bar{
+    position: fixed;
+    width: 250px;
+    height: 100%;
+    background-color: rgb(22, 22, 94);
+    margin-left: -200px;
+    transition: 1s;
+}
+
+#check hr{
+    height: 3px;
+    background-color: white;
+}
+
+#check{
+    background-color: rgb(0, 1, 58);
+    display: inline-block;
+    margin-left: 75%;
+    width: 50px;
+    height: 50px;
+}
+
+#check:hover{
+    cursor: grab;
+}
+
+.nav_bar:hover{
+    margin-left: 0px;
+    transition: 1s;
+}
+
+.nav_bar li{
+    height: 35px;
+    width: 95%;
+    display: inline-block;
+    margin-left: -10px;
+    border-radius: 5px;
+    text-align: left;
+    padding-top: 5px;
+    padding-left: 5px;
+}
+
+.nav_bar li a{
+    display: inline-block;
+    height: 35px;
+    width: 95%;
+}
+
+.nav_bar li:hover{
+    transition: 0.3s;
+    background-color: rgb(0, 5, 48);
+}
+
+.conteneur{
+    width: 380px;
+    padding-bottom: 50%;
+    margin-left: 50px;
+    padding-top: 20px;
+    padding-left: 20px;
+    background-color: rgb(6, 11, 53);
+}
+
+.large{
+    width: 300px;
+    padding-bottom: 70%;
+    margin-top: 2%;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.medium{
+    width: 250px;
+    padding-bottom: 40%;
+    margin-top: 2%;
+    text-align: center;
+    padding-left: 10px;
+}
+
+.question{
+    width: 250px;
+    padding-bottom: 40%;
+    margin-top: 2%;
+    text-align: center;
+    padding-left: 10px;
+    position: fixed;
+}
+
+.classement{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.danger{
+    color: white;
+    background-color: rgb(209, 20, 20);
+}

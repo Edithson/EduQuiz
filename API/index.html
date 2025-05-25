@@ -1,0 +1,247 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vous</title>
+    <style>
+        body{
+            background-color: rgb(12, 12, 92);
+            color: white;
+        }
+        section{
+            margin: 100 auto;
+            width: 400px;
+            height: 400px;
+            background-color: rgb(13, 13, 63);
+            color: white;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 10px, black;
+            overflow: hidden;
+        }
+        input, select, option{
+            background-color: rgb(3, 3, 34);
+            color: white;
+            font-weight: bold;
+            width: 150px;
+            text-align: left;
+        }
+        th{
+            display: inline-block;
+            width: 70px;
+            text-align: right;
+            margin-top: 30px;
+            margin-left: 15px;
+        }
+        #suivant, #precedant{
+            width: 100;
+            height: 12px;
+            background-color: rgb(3, 3, 34);
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+        .suivant, .precedant{
+            width: 150;
+            height: 12px;
+            margin-top: -30px;
+            color: white;
+            font-weight: bold;
+        }
+        #suivant:hover, #precedant:hover{
+            cursor: grab;
+            background-color: rgb(255, 255, 255);
+            color: black;
+        }
+        .table2{
+            width: 300px;
+        }
+        div{
+            padding: 10px;
+            width: 350px;
+            height: 350px;
+            text-align: center;
+            border-radius: 7px;
+            margin-bottom: 20px;
+            float: left;
+        }
+        #conteneur{
+            width: 700px;
+            height: 368px;
+            margin-left: 0px;
+        }
+        #matiere{
+            margin-left: 400px;
+            margin-top: -430px;
+        }
+
+        table{
+            display: inline-block;
+            text-align: center;
+            width: 270px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        #a, #b{
+            width: 350px;
+            height: 200px;
+            margin: 0;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        #b{
+            margin-top: -90px;
+        }
+        input[type="radio"]{
+            margin-left: 30px;
+            width: 20px;
+        }
+        #boutons{
+            position: absolute;
+            width: 450px;
+            height: 50px;
+            margin-top: -110px;
+            margin-left: 500px;
+        }
+        #magie{
+            display: none;
+            margin-top: -137px;
+            margin-left: 685px;
+            position: absolute;
+            width: 100;
+            height: 12px;
+            color: white;
+            font-weight: bold;
+            background-color: rgb(3, 3, 34);
+        }
+        #magie:hover, a:hover{
+            cursor: grab;
+            background-color: rgb(255, 255, 255);
+            color: black;
+        }
+        a{
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            width: 100;
+            height: 12px;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div id="conteneur">
+        <div id="intro">
+            <h2>Identifiez vous</h2>
+            <form action="">
+                <table>
+                    <tr>
+                        <th><label for="">Nom: </label></th>
+                        <th><input placeholder="obligatoire" type="text"></th>
+                    </tr>
+                    <tr>
+                        <th><label for="">Prenom: </label></th>
+                        <th><input placeholder="obligatoire" type="text"></th>
+                    </tr>
+                    <tr>
+                        <th><label for="">Classe: </label></th>
+                        <th>
+                            <select name="" id="">
+                                <optgroup label="Collège">
+                                    <option value="">6em</option>
+                                    <option value="">5em</option>
+                                    <option value="">4em</option>
+                                    <option value="">3em</option>
+                                </optgroup>
+                                <optgroup label="Lycée">
+                                    <option selected value="">2nd</option>
+                                    <option value="">1ere</option>
+                                    <option value="">Tle</option>
+                                </optgroup>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th><label for="">Spécialité: </label></th>
+                        <th>
+                            <select name="" id="">
+                                <optgroup label="Générales">
+                                    <option value="">A Allemand</option>
+                                    <option value="">A Espagnol</option>
+                                    <option value="">C</option>
+                                    <option value="">D</option>
+                                    <option value="">E</option>
+                                    <option value="">TI</option>
+                                </optgroup>
+                                <optgroup label="Techniques commerciales">
+                                    <option value="">G1</option>
+                                    <option value="">G2</option>
+                                    <option value="">G3</option>
+                                    <option value="">ESF</option>
+                                </optgroup>
+                                <optgroup label="Techniques industrielles">
+                                    <option value="">F1</option>
+                                    <option value="">F2</option>
+                                    <option value="">F3</option>
+                                    <option value="">F4</option>
+                                    <option value="">F5</option>
+                                    <option value="">F6</option>
+                                    <option value="">IH</option>
+                                    <option value="">GT</option>
+                                    <option value="">CMA</option>
+                                    <option value="">MEM</option>
+                                </optgroup>
+                            </select>
+                        </th>
+                    </tr>
+                </table>
+
+            </form>
+        </div>
+        <div id="matiere">
+            <h2>Choisissez votre matière d'évaluation</h2>
+            <div id="a">
+                <fieldset><legend>Matière générale</legend>
+                    <input type="radio" name="matiere" value="m1">Français<br>
+                    <input type="radio" name="matiere" value="m2">Anglais<br>
+                    <input type="radio" name="matiere" value="m3">Géographie<br>
+                    <input type="radio" name="matiere" value="m9">Ethique<br>
+                    <input type="radio" name="matiere" value="m9">Informatique<br>
+                </div>
+            <div id="b">
+                
+                <fieldset><legend>Matière de Spécialité</legend>
+                    <input checked type="radio" name="matiere" value="m4">Comptabilité de management<br>
+                    <input type="radio" name="matiere" value="m5">Finance d'entreprise<br>
+                    <input type="radio" name="matiere" value="m6">Economie général<br>
+                    <input type="radio" name="matiere" value="m7">Droit<br>
+                    <input type="radio" name="matiere" value="m8">Mathématique appliquée<br>
+                </div>
+        </div>
+    </div>
+    </section>
+    <table id="boutons">
+        <tr class="table2">
+            <th  class="precedant"><div id="precedant"> << Precedant</div></th>
+            <th  class="suivant"><div id="suivant">Suivant >></div></th>
+        </tr>
+    </table>
+    <div id="magie">
+        <a href="page1.html">Suivant >></a>
+    </div>
+    <script>
+        document.getElementById("suivant").addEventListener("click", function(){
+            document.getElementById("conteneur").style.marginLeft = "-400px"
+            document.getElementById("conteneur").style.transition = "1s"
+            document.getElementById("magie").style.display = "inline-block"
+        })
+        document.getElementById("precedant").addEventListener("click", function(){
+            document.getElementById("conteneur").style.marginLeft = "0px"
+            document.getElementById("conteneur").style.transition = "1s"
+            document.getElementById("magie").style.display = "none"
+        })
+    </script>
+</body>
+</html>

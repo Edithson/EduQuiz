@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuiz - Votre compagnon d'apprentissage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">🎓 EduQuiz</a>
+            
+            <!-- Desktop Menu -->
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#accueil" class="nav-link active">🏠 Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="a_propos.html" class="nav-link">📖 À propos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a href="#fonctionnalites" class="nav-link">
+                        ⚙️ Fonctionnalités <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#gestion-classes" class="dropdown-item">👥 Gestion des classes</a>
+                        <a href="#gestion-questions" class="dropdown-item">❓ Gestion des questions</a>
+                        <a href="#gestion-matieres" class="dropdown-item">📚 Gestion des matières</a>
+                        <a href="#gestion-utilisateurs" class="dropdown-item">👤 Gestion des utilisateurs</a>
+                        <a href="#statistiques" class="dropdown-item">📊 Statistiques</a>
+                        <a href="#parametres" class="dropdown-item">⚙️ Paramètres</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">📧 Contact</a>
+                </li>
+            </ul>
+            
+            <!-- Mobile Menu Toggle -->
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span id="menu-icon">☰</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-nav-menu">
+            <a href="#accueil" class="mobile-nav-link active" onclick="closeMobileMenu()">🏠 Accueil</a>
+            <a href="#apropos" class="mobile-nav-link" onclick="closeMobileMenu()">📖 À propos</a>
+            <a href="#" class="mobile-nav-link" onclick="toggleMobileDropdown()">⚙️ Fonctionnalités ▼</a>
+            <div class="mobile-dropdown" id="mobile-dropdown">
+                <a href="#gestion-classes" class="mobile-dropdown-item" onclick="closeMobileMenu()">👥 Gestion des classes</a>
+                <a href="#gestion-questions" class="mobile-dropdown-item" onclick="closeMobileMenu()">❓ Gestion des questions</a>
+                <a href="#gestion-matieres" class="mobile-dropdown-item" onclick="closeMobileMenu()">📚 Gestion des matières</a>
+                <a href="#gestion-utilisateurs" class="mobile-dropdown-item" onclick="closeMobileMenu()">👤 Gestion des utilisateurs</a>
+                <a href="#statistiques" class="mobile-dropdown-item" onclick="closeMobileMenu()">📊 Statistiques</a>
+                <a href="#parametres" class="mobile-dropdown-item" onclick="closeMobileMenu()">⚙️ Paramètres</a>
+            </div>
+            <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">📧 Contact</a>
+        </div>
+    </div>
+
+    <div class="stars" id="stars"></div>
+    
+    <div class="floating-elements">
+        <div class="floating-book">📚</div>
+        <div class="floating-pencil">✏️</div>
+        <div class="floating-lightbulb">💡</div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1 class="logo">🎓 EduQuiz</h1>
+            <p class="tagline">Transformez votre apprentissage en aventure ludique</p>
+        </header>
+
+        <div class="main-content">
+            <div class="welcome-section">
+                <h2 class="welcome-title">Bienvenue dans votre espace d'apprentissage ! 🌟</h2>
+                <p class="welcome-text">
+                    Découvrez une nouvelle façon d'apprendre qui combine le plaisir du jeu avec la rigueur académique. 
+                    Testez vos connaissances, défiez vos limites et progressez à votre rythme dans un environnement 
+                    bienveillant et motivant.
+                </p>
+                <button class="cta-button" onclick="startQuiz()">Commencer mon parcours 🚀</button>
+            </div>
+
+            <div class="features-preview">
+                <div class="feature-card" onclick="showFeature('vote')">
+                    <span class="feature-icon">🗳️</span>
+                    <h3 class="feature-title">Vote de classe</h3>
+                    <p class="feature-desc">Demandez l'aide de vos camarades virtuels</p>
+                </div>
+                
+                <div class="feature-card" onclick="showFeature('help')">
+                    <span class="feature-icon">📞</span>
+                    <h3 class="feature-title">Coup de fil prof</h3>
+                    <p class="feature-desc">Un petit conseil de votre enseignant</p>
+                </div>
+                
+                <div class="feature-card" onclick="showFeature('fifty')">
+                    <span class="feature-icon">⚡</span>
+                    <h3 class="feature-title">50/50</h3>
+                    <p class="feature-desc">Éliminez deux mauvaises réponses</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-card">
+                <span class="stat-number" id="questions-count">1,247</span>
+                <div class="stat-label">Questions disponibles</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-number" id="students-count">523</span>
+                <div class="stat-label">Étudiants actifs</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-number" id="subjects-count">15</span>
+                <div class="stat-label">Matières couvertes</div>
+            </div>
+            
+            <div class="stat-card">
+                <span class="stat-number" id="success-rate">87%</span>
+                <div class="stat-label">Taux de réussite</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

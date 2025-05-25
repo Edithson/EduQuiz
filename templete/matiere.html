@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Matières - EduQuiz</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-book">📚</div>
+        <div class="floating-atom">⚛️</div>
+        <div class="floating-globe">🌍</div>
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">📚 Gestion des Matières</h1>
+            <p class="page-subtitle">
+                Organisez et gérez toutes les matières de votre plateforme d'apprentissage. 
+                Créez, modifiez et suivez les performances de chaque discipline ! 🎯
+            </p>
+        </div>
+
+        <div class="action-bar">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="🔍 Rechercher une matière..." 
+                       onkeyup="filterSubjects()" id="searchInput">
+                <select class="filter-select" onchange="filterByLevel()" id="levelFilter">
+                    <option value="">Tous les niveaux</option>
+                    <option value="debutant">Débutant</option>
+                    <option value="intermediaire">Intermédiaire</option>
+                    <option value="avance">Avancé</option>
+                </select>
+            </div>
+            <button class="add-btn" onclick="openModal()">
+                ➕ Ajouter une matière
+            </button>
+        </div>
+
+        <div class="subjects-grid" id="subjectsGrid">
+            <!-- Les matières seront générées dynamiquement ici -->
+        </div>
+    </div>
+
+    <!-- Modal pour ajouter/modifier une matière -->
+    <div id="subjectModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">📚 Ajouter une nouvelle matière</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="subjectForm">
+                    <div class="form-group">
+                        <label for="subjectName" class="form-label">📖 Nom de la matière</label>
+                        <input type="text" id="subjectName" class="form-input" required 
+                               placeholder="Ex: Mathématiques Appliquées">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subjectCode" class="form-label">🔢 Code de la matière</label>
+                        <input type="text" id="subjectCode" class="form-input" required 
+                               placeholder="Ex: MATH101">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subjectDescription" class="form-label">📝 Description</label>
+                        <textarea id="subjectDescription" class="form-textarea" 
+                                  placeholder="Décrivez le contenu et les objectifs de cette matière..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subjectLevel" class="form-label">📊 Niveau de difficulté</label>
+                        <select id="subjectLevel" class="form-select" required>
+                            <option value="">Choisissez un niveau...</option>
+                            <option value="debutant">🟢 Débutant</option>
+                            <option value="intermediaire">🟡 Intermédiaire</option>
+                            <option value="avance">🔴 Avancé</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subjectIcon" class="form-label">🎨 Icône (Emoji)</label>
+                        <input type="text" id="subjectIcon" class="form-input" 
+                               placeholder="Ex: 🧮" maxlength="2">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" onclick="closeModal()">Annuler</button>
+                <button type="button" class="btn-save" onclick="saveSubject()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Données de démonstration
+        let subjects = [
+            {
+                id: 1,
+                name: "Mathématiques Générales",
+                code: "MATH101",
+                description: "Fondamentaux des mathématiques pour l'enseignement supérieur",
+                level: "debutant",
+                icon: "🧮",
+                questionsCount: 145,
+                studentsCount: 89
+            },
+            {
+                id: 2,
+                name: "Histoire Contemporaine",
+                code: "HIST201",
+                description: "Étude des événements historiques des 19e et 20e siècles",
+                level: "intermediaire",
+                icon: "📜",
+                questionsCount: 78,
+                studentsCount: 56
+            },
+            {
+                id: 3,
+                name: "Littérature Française",
+                code: "LITT301",
+                description: "Analyse des œuvres majeures de la littérature française",
+                level: "avance",
+                icon: "📖",
+                questionsCount: 92,
+                studentsCount: 34
+            },
+            {
+                id: 4,
+                name: "Sciences Physiques",
+                code: "PHYS102",
+                description: "Principes fondamentaux de la physique appliquée",
+                level: "intermediaire",
+                icon: "⚛️",
+                questionsCount: 167,
+                studentsCount: 73
+            },
+            {
+                id: 5,
+                name: "Géographie Humaine",
+                code: "GEO201",
+                description: "Étude des interactions entre l'homme et son environnement",
+                level: "debutant",
+                icon: "🌍",
+                questionsCount: 54,
+                studentsCount: 42
+            },
+            {
+                id: 6,
+                name: "Économie Politique",
+                code: "ECON301",
+                description: "Analyse des systèmes économiques et politiques modernes",
+                level: "avance",
+                icon: "💰",
+                questionsCount: 89,
+                studentsCount: 28
+            }
+        ];
+
+        let editingId = null;
+
+        // Rendu des matières
+        function renderSubjects(subjectsToRender = subjects) {
+            const grid = document.getElementById('subjectsGrid');
+            grid.innerHTML = '';
+
+            subjectsToRender.forEach(subject => {
+                const subjectCard = document.createElement('div');
+                subjectCard.className = 'subject-card';
+                subjectCard.innerHTML = `
+                    <div class="subject-header">
+                        <div>
+                            <div class="subject-icon">${subject.icon}</div>
+                            <h3 class="subject-title">${subject.name}</h3>
+                            <p class="subject-code">${subject.code}</p>
+                        </div>
+                        <div class="subject-actions">
+                            <button class="action-btn edit-btn" onclick="editSubject(${subject.id})" title="Modifier">✏️</button>
+                            <button class="action-btn delete-btn" onclick="deleteSubject(${subject.id})" title="Supprimer">🗑️</button>
+                        </div>
+                    </div>
+                    <p class="subject-description">${subject.description}</p>
+                    <div class="subject-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">${subject.questionsCount}</span>
+                            <div class="stat-label">Questions</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">${subject.studentsCount}</span>
+                            <div class="stat-label">Étudiants</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="subject-level level-${subject.level}">
+                                ${subject.level.charAt(0).toUpperCase() + subject.level.slice(1)}
+                            </span>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(subjectCard);
+            });
+        }
+
+        // Filtrage des matières
+        function filterSubjects() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const levelFilter = document.getElementById('levelFilter').value;
+            
+            let filtered = subjects.filter(subject => {
+                const matchesSearch = subject.name.toLowerCase().includes(searchTerm) || 
+                                    subject.code.toLowerCase().includes(searchTerm) ||
+                                    subject.description.toLowerCase().includes(searchTerm);
+                const matchesLevel = !levelFilter || subject.level === levelFilter;
+                
+                return matchesSearch && matchesLevel;
+            });
+            
+            renderSubjects(filtered);
+        }
+
+        function filterByLevel() {
+            filterSubjects();
+        }
+
+        // Gestion du modal
+        function openModal(subject = null) {
+            const modal = document.getElementById('subjectModal');
+            const modalTitle = document.getElementById('modalTitle');
+            
+            if (subject) {
+                modalTitle.textContent = '✏️ Modifier la matière';
+                document.getElementById('subjectName').value = subject.name;
+                document.getElementById('subjectCode').value = subject.code;
+                document.getElementById('subjectDescription').value = subject.description;
+                document.getElementById('subjectLevel').value = subject.level;
+                document.getElementById('subjectIcon').value = subject.icon;
+                editingId = subject.id;
+            } else {
+                modalTitle.textContent = '📚 Ajouter une nouvelle matière';
+                document.getElementById('subjectForm').reset();
+                editingId = null;
+            }
+            
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('subjectModal').style.display = 'none';
+            document.getElementById('subjectForm').reset();
+            editingId = null;
+        }
+
+        // CRUD Operations
+        function saveSubject() {
+            const name = document.getElementById('subjectName').value;
+            const code = document.getElementById('subjectCode').value;
+            const description = document.getElementById('subjectDescription').value;
+            const level = document.getElementById('subjectLevel').value;
+            const icon = document.getElementById('subjectIcon').value || '📚';
+
+            if (!name || !code || !level) {
+                alert('⚠️ Veuillez remplir tous les champs obligatoires !');
+                return;
+            }
+
+            if (editingId) {
+                // Modification
+                const index = subjects.findIndex(s => s.id === editingId);
+                if (index !== -1) {
+                    subjects[index] = {
+                        ...subjects[index],
+                        name,
+                        code,
+                        description,
+                        level,
+                        icon
+                    };
+                }
+            } else {
+                // Ajout
+                const newSubject = {
+                    id: Math.max(...subjects.map(s => s.id)) + 1,
+                    name,
+                    code,
+                    description,
+                    level,
+                    icon,
+                    questionsCount: 0,
+                    studentsCount: 0
+                };
+                subjects.push(newSubject);
+            }
+
+            renderSubjects();
+            closeModal();
+            
+            const message = editingId ? '✅ Matière modifiée avec succès !' : '✅ Nouvelle matière ajoutée avec succès !';
+            alert(message);
+        }
+
+        function editSubject(id) {
+            const subject = subjects.find(s => s.id === id);
+            if (subject) {
+                openModal(subject);
+            }
+        }
+
+        function deleteSubject(id) {
+            const subject = subjects.find(s => s.id === id);
+            if (subject && confirm(`🗑️ Êtes-vous sûr de vouloir supprimer la matière "${subject.name}" ?\n\nCette action est irréversible et supprimera également toutes les questions associées.`)) {
+                subjects = subjects.filter(s => s.id !== id);
+                renderSubjects();
+                alert('✅ Matière supprimée avec succès !');
+            }
+        }
+
+        // Fermer le modal en cliquant à l'extérieur
+        window.onclick = function(event) {
+            const modal = document.getElementById('subjectModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', function() {
+            renderSubjects();
+        });
+    </script>
+</body>
+</html>

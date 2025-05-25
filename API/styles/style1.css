@@ -1,0 +1,261 @@
+body html {
+    height: 100%;
+    margin: 0;
+  }
+#libelle{
+    width: 500px;
+    height: 40px;
+    padding-top:10px;
+    border-radius:10px;
+    background-color: rgb(18, 19, 51);
+    text-align: center;
+    margin: 0 auto;
+    margin-top:10px;
+}
+#Q1, #Q2, #Q3, #Q4{
+    width: 270px;
+    height: 30px;
+    margin-left: 5px;
+    position: absolute;
+    text-align: center;
+    padding-top:5px;
+    padding-bottom:10px;
+    border-radius:10px;
+    background-color: rgb(18, 19, 51);
+}
+#Q1{
+    margin-top: 5px;
+}
+#Q2{
+    margin-top: -30px;
+    margin-left: 310px;
+}
+#Q3{
+    margin-top: -5px;
+}
+#Q4{
+    margin-top: -41px;
+    margin-left: 310px;
+}
+#Q1:hover, #Q2:hover, #Q3:hover, #Q4:hover, #libelle:hover{
+    background-color: rgb(16, 36, 126);
+    cursor: grab;
+}
+#questions{
+    display: block;
+    padding-top:2px;
+    width: 600px;
+    height: 220px;
+    margin: 60 auto;
+    background-color: rgba(12, 1, 53, 0.2);
+}
+#reponse{
+    width: 585px;
+    height: 115px;
+    /* display: grid;
+    grid-template-columns: repeat(4,150px);
+    grid-template-rows: repeat(4,60px);
+    grid-gap: 7px; */
+    margin: 0 auto;
+}
+#perdu, #accueil{
+    display: none;
+    width: 400px;
+    height: 450px;
+    position: absolute;
+    background-color: rgb(5, 7, 44);
+    opacity: 0.9;
+    font-size: x-large;
+    text-align: center;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+#accueil{
+    display: inline-block;
+}
+body{
+    color: white;
+    font-weight: bold;
+    background-color: rgb(11, 6, 34);
+    margin: auto 5;
+    min-width: 500px;
+    margin-left: 0px;
+    padding-top: 0px;
+}
+#score{
+    display: inline-block;
+}
+#tolk{
+    float: left;
+    margin-top: 10px;
+    margin-left: 20px;
+    width: 50px;
+    height: 300px;
+}
+.outil{
+    width: 50px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    border-radius: 50px;
+    background-color: rgb(103, 221, 7);
+}
+.outil:hover{
+    cursor: grabbing;
+    background-color: rgb(133, 170, 128);
+}
+#outil2{
+    position: absolute;
+    color: black;
+    background-color: white;
+    font-size: medium;
+    text-align: center;
+    padding-top: 7px;
+    height: 27px;
+    width: 37px;
+    margin-left: 6px;
+    margin-top: 8px;
+    border-radius: 20px;
+}
+#son{
+    margin-top: 2.45px;
+    margin-left: 2.9px;
+    width: 25px;
+    height: 25px;
+    border-radius: 15px;
+}
+#outilSon{
+    margin-top: 50px;
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+    background-color: rgb(103, 221, 7);
+}
+#parametre{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+#outil1, #outil2, #outil3{
+    margin-bottom: 10px;
+}
+.imgG1{
+    width: 40px;
+    height: 40px;
+    margin-top: 5px;
+    margin-left: 5px;
+    border-radius: 20px;
+}
+#R1, #R2, #R3, #R4{
+    height: 10px;
+    width: 2px;
+    background-color: rgb(103, 221, 7);
+}
+#public{
+    text-align: center;
+    display: none;
+    position: absolute;
+    width: 400px;
+    height: 180px;
+    background-color: rgb(18, 19, 51);
+    opacity: 0.9;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#publicOk{
+    display: inline-block;
+    width: 100px;
+    margin: 0 auto;
+}
+#gain{
+    margin-top: 10px;
+    margin-left: 670px;
+    width: 140px;
+    height: 220px;
+}
+#niveau{
+    margin-right: 5px;
+    border-radius: 5px;
+    float: left;
+    width: 15px;
+    height: 220px;
+    background-color: rgb(224, 39, 39);
+}
+#barre{
+    border-radius: 5px;
+    width: 15px;
+    height: 215px;
+    background-color: rgb(231, 147, 147);
+}
+#conteneur{
+    position: absolute;
+    width: 750px;
+    height: 560px;
+    background-color: rgb(9, 3, 43);
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 5px;
+}
+#drap{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 760px;
+    height: 600px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+#mtt{
+    margin-top: -3px;
+    text-align: right;
+    margin-right: 20px;
+}
+#nouvellePartie{
+    text-align: center;
+    text-decoration: none;
+    width: 150px;
+    height: 50px;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 2px 2px 2px black;
+}
+#nouvellePartie:active{
+    box-shadow: 0px 1px 1px 1px black;
+}
+.msg{
+    font-size: x-small;
+    font-weight: lighter;
+}
+#credit{
+    display: none;
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    text-align: center;
+    background-color: rgb(35, 13, 94);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#parametreOk{
+    margin: 0 auto;
+}
+li{
+    text-decoration: none;
+}
+.denger{
+    position: fixed;
+    border-radius: 5px;
+    color: white;
+    background-color: brown;
+    font-weight: bold;
+    margin-top: -100px;
+    margin-left: 5px;
+}

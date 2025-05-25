@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduQuiz - L'avenir de l'apprentissage</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fond animé avec particules */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 50%, #0f0f0f 100%);
+            z-index: -2;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation futuriste */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+            text-decoration: none;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #ff00ff);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        /* Section héro 3D */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 2rem;
+            transform-style: preserve-3d;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00, #00ff00);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 4s ease infinite, float3d 6s ease-in-out infinite;
+            text-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            25% { background-position: 50% 0%; }
+            50% { background-position: 100% 50%; }
+            75% { background-position: 50% 100%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float3d {
+            0%, 100% { transform: translateY(0px) rotateX(0deg); }
+            50% { transform: translateY(-20px) rotateX(5deg); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 2rem;
+            color: #00ffff;
+            opacity: 0.9;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ffff; }
+            to { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff; }
+        }
+
+        /* Boutons holographiques */
+        .cta-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .hologram-btn {
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: transparent;
+            border: 2px solid;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            border-color: #00ffff;
+            color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .btn-secondary {
+            border-color: #ff00ff;
+            color: #ff00ff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
+        }
+
+        .hologram-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .hologram-btn:hover::before {
+            left: 100%;
+        }
+
+        .hologram-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 40px rgba(0, 255, 255, 0.6);
+        }
+
+        /* Cubes 3D flottants */
+        .floating-cubes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .cube {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            transform-style: preserve-3d;
+            animation: rotateCube 10s linear infinite;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+        }
+
+        .cube-face.front { transform: translateZ(30px); }
+        .cube-face.back { transform: translateZ(-30px) rotateY(180deg); }
+        .cube-face.right { transform: rotateY(90deg) translateZ(30px); }
+        .cube-face.left { transform: rotateY(-90deg) translateZ(30px); }
+        .cube-face.top { transform: rotateX(90deg) translateZ(30px); }
+        .cube-face.bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+        @keyframes rotateCube {
+            0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+        }
+
+        /* Section fonctionnalités hexagonales */
+        .features-section {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            position: relative;
+        }
+
+        .features-title {
+            text-align: center;
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            margin-bottom: 4rem;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        .hexagon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hexagon-card {
+            position: relative;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.5s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .hexagon-card:hover {
+            transform: translateY(-15px) rotateY(5deg);
+            border-color: #ff00ff;
+            box-shadow: 0 20px 50px rgba(255, 0, 255, 0.4);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .feature-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .feature-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        /* Compteurs holographiques */
+        .stats-section {
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #ff00ff;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.5);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Footer futuriste */
+        .footer {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(26, 26, 46, 0.9));
+            border-top: 2px solid rgba(0, 255, 255, 0.3);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            font-family: 'Orbitron', monospace;
+            color: #00ffff;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-title { font-size: 2.5rem; }
+            .cta-container { flex-direction: column; align-items: center; }
+            .hologram-btn { width: 100%; max-width: 300px; }
+            .features-title { font-size: 2rem; }
+        }
+
+        /* Effet de matrice */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+    </style>
+</head>
+<body>
+    <div class="space-bg"></div>
+    <div class="stars" id="stars"></div>
+    <canvas class="matrix-rain" id="matrix"></canvas>
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">◈ EDUQUIZ</a>
+            <ul class="nav-links">
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#features">Modules</a></li>
+                <li><a href="#stats">Données</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="floating-cubes" id="cubes"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">NEUROQUIZ</h1>
+            <p class="hero-subtitle">L'apprentissage du futur est arrivé. Plongez dans une expérience immersive où la connaissance rencontre la technologie.</p>
+            <div class="cta-container">
+                <a href="#" class="hologram-btn btn-primary" onclick="initiateLaunch()">◉ LANCER MISSION</a>
+                <a href="#" class="hologram-btn btn-secondary" onclick="exploreFeatures()">⬡ EXPLORER MODULES</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" data-count="2500">0</div>
+                <div class="stat-label">Questions Neural</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="25">0</div>
+                <div class="stat-label">Disciplines Actives</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="1200">0</div>
+                <div class="stat-label">Apprenants Connectés</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-count="98">0</div>
+                <div class="stat-label">Taux de Réussite</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <h2 class="features-title">MODULES QUANTIQUES</h2>
+        <div class="hexagon-grid">
+            <div class="hexagon-card">
+                <span class="feature-icon">🗳️</span>
+                <h3 class="feature-title">Neural Vote</h3>
+                <p class="feature-description">Connectez-vous à l'intelligence collective. Le vote neuronal de la classe vous guide vers la vérité.</p>
+            </div>
+            
+            <div class="hexagon-card">
+                <span class="feature-icon">📡</span>
+                <h3 class="feature-title">Prof-Link</h3>
+                <p class="feature-description">Transmission directe avec votre mentor virtuel. Une connexion instantanée vers la sagesse.</p>
+            </div>
+            
+            <div class="hexagon-card">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">Quantum 50/50</h3>
+                <p class="feature-description">L'algorithme quantique élimine les fausses réalités, ne laissant que deux vérités possibles.</p>
+            </div>
+            
+            <div class="hexagon-card">
+                <span class="feature-icon">🧠</span>
+                <h3 class="feature-title">IA Adaptative</h3>
+                <p class="feature-description">L'intelligence artificielle apprend de vous et évolue selon vos patterns cognitifs.</p>
+            </div>
+            
+            <div class="hexagon-card">
+                <span class="feature-icon">🎯</span>
+                <h3 class="feature-title">Difficulté Dynamique</h3>
+                <p class="feature-description">Système auto-adaptatif qui calibre le niveau de défi selon vos performances neuronales.</p>
+            </div>
+            
+            <div class="hexagon-card">
+                <span class="feature-icon">📊</span>
+                <h3 class="feature-title">Analytics 4D</h3>
+                <p class="feature-description">Visualisation multidimensionnelle de vos progrès dans l'espace-temps de l'apprentissage.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-text">◈ EDUQUIZ 2024 ◈ L'ÉVOLUTION DE L'APPRENTISSAGE ◈</p>
+        </div>
+    </footer>
+
+    <script>
+        // Génération des étoiles
+        function generateStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 200; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Génération des cubes flottants
+        function generateCubes() {
+            const cubesContainer = document.getElementById('cubes');
+            for (let i = 0; i < 8; i++) {
+                const cube = document.createElement('div');
+                cube.className = 'cube';
+                cube.style.left = Math.random() * 100 + '%';
+                cube.style.top = Math.random() * 100 + '%';
+                cube.style.animationDelay = Math.random() * 10 + 's';
+                cube.style.animationDuration = (8 + Math.random() * 4) + 's';
+                
+                for (let j = 0; j < 6; j++) {
+                    const face = document.createElement('div');
+                    face.className = `cube-face ${['front', 'back', 'right', 'left', 'top', 'bottom'][j]}`;
+                    cube.appendChild(face);
+                }
+                
+                cubesContainer.appendChild(cube);
+            }
+        }
+
+        // Animation des compteurs
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        let current = 0;
+                        const increment = target / 100;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                counter.textContent = target + (target === 98 ? '%' : '+');
+                                clearInterval(timer);
+                            } else {
+                                counter.textContent = Math.floor(current) + (target === 98 ? '%' : '+');
+                            }
+                        }, 30);
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+            
+            counters.forEach(counter => observer.observe(counter));
+        }
+
+        // Effet de matrice
+        function initMatrix() {
+            const canvas = document.getElementById('matrix');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const chars = '01';
+            const charArray = chars.split('');
+            const fontSize = 10;
+            const columns = canvas.width / fontSize;
+            const drops = [];
+            
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+            
+            function draw() {
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                ctx.fillStyle = '#00ffff';
+                ctx.font = fontSize + 'px monospace';
+                
+                for (let i = 0; i < drops.length; i++) {
+                    const text = charArray[Math.floor(Math.random() * charArray.length)];
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                    
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+            
+            setInterval(draw, 50);
+        }
+
+        // Fonctions d'interaction
+        function initiateLaunch() {
+            document.body.style.animation = 'pulse 0.5s ease';
+            setTimeout(() => {
+                alert('🚀 LANCEMENT DE LA MISSION D\'APPRENTISSAGE INITIALISÉ !\n\nPréparation des modules quantiques...');
+                document.body.style.animation = '';
+            }, 500);
+        }
+
+        function exploreFeatures() {
+            document.getElementById('features').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        }
+
+        // Animation de la navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(0, 0, 0, 0.95)';
+                navbar.style.borderBottom = '2px solid rgba(0, 255, 255, 0.5)';
+            } else {
+                navbar.style.background = 'rgba(0, 0, 0, 0.8)';
+                navbar.style.borderBottom = '1px solid rgba(0, 255, 255, 0.3)';
+            }
+        });
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            generateStars();
+            generateCubes();
+            animateCounters();
+            initMatrix();
+            
+            // Effet de souris
+            document.addEventListener('mousemove', (e) => {
+                if (Math.random() > 0.97) {
+                    const spark = document.createElement('div');
+                    spark.style.position = 'fixed';
+                    spark.style.left = e.clientX + 'px';
+                    spark.style.top = e.clientY + 'px';
+                    spark.style.width = '3px';
+                    spark.style.height = '3px';
+                    spark.style.background = '#00ffff';
+                    spark.style.borderRadius = '50%';
+                    spark.style.pointerEvents = 'none';
+                    spark.style.zIndex = '9999';
+                    spark.style.boxShadow = '0 0 10px #00ffff';
+                    spark.style.animation = 'sparkle 1s ease-out forwards';
+                    
+                    document.body.appendChild(spark);
+                    setTimeout(() => spark.remove(), 1000);
+                }
+            });
+        });
+
+        // Styles d'animation supplémentaires
+        const additionalStyles = `
+            @keyframes sparkle {
+                0% { opacity: 1; transform: scale(1); }
+                100% { opacity: 0; transform: scale(0); }
+            }
+            
+            @keyframes pulse {
+                0%, 100% { transform: scale(1); }
+                50% { transform: scale(1.02); }
+            }
+        `;
+        
+        const styleSheet = document.createElement('style');
+        styleSheet.textContent = additionalStyles;
+        document.head.appendChild(styleSheet);
+
+        // Redimensionnement du canvas
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('matrix');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
