@@ -12,9 +12,7 @@
                 <li class="nav-item">
                     <a href="index.php?path=accueil" class="nav-link active">🏠 Accueil</a>
                 </li>
-                <li class="nav-item">
-                    <a href="a_propos.html" class="nav-link">📖 À propos</a>
-                </li>
+                
                 <?php
                 if (isset($_SESSION['auth']) && $_SESSION['auth']==true) {
                     ?>
@@ -43,17 +41,25 @@
                         </div>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="index.php?path=profile">Profil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php?path=deconnexion">Déconnexion</a></li>
-                    <?php
-                }else {
-                    ?>
-                    <li class="nav-item"><a class="nav-link" href="index.php?path=connexion">Connexion</a></li>
                     <?php
                 }
                 ?>
                 <li class="nav-item">
-                    <a href="contact.html" class="nav-link">📧 Contact</a>
+                    <a href="index.php?path=apropos" class="nav-link">📖 À propos</a>
                 </li>
+                <li class="nav-item">
+                    <a href="index.php?path=contact" class="nav-link">📧 Contact</a>
+                </li>
+                <?php
+                if (isset($_SESSION['auth']) && $_SESSION['auth']==true) {
+                    ?>
+                    <li class="nav-item"><a class="nav-link" href="index.php?path=deconnexion">Déconnexion</a></li>
+                    <?php
+                }else{
+                    ?>
+                    <li class="nav-item"><a class="nav-link" href="index.php?path=connexion">Connexion</a></li>
+                    <?php
+                } ?>
             </ul>
             
             <!-- Mobile Menu Toggle -->
@@ -67,7 +73,7 @@
     <div class="mobile-menu" id="mobile-menu">
         <div class="mobile-nav-menu">
             <a href="index.php?path=accueil" class="mobile-nav-link active" onclick="closeMobileMenu()">🏠 Accueil</a>
-            <a href="#apropos" class="mobile-nav-link" onclick="closeMobileMenu()">📖 À propos</a>
+            
             <?php
             if (isset($_SESSION['auth']) && $_SESSION['auth']==true) {
                 ?>
@@ -92,12 +98,19 @@
                 ?>
                 </div>
             <?php
-            }else {
+            }
+            ?>
+            <a href="index.php?path=apropos" class="mobile-nav-link" onclick="closeMobileMenu()">📖 À propos</a>
+            <a href="index.php?path=contact" class="mobile-nav-link" onclick="closeMobileMenu()">📧 Contact</a>
+            <?php
+            if (isset($_SESSION['auth']) && $_SESSION['auth']==true) {
+                ?>
+                <a class="mobile-nav-link" href="index.php?path=deconnexion">Déconnexion</a>
+                <?php
+            }else{
                 ?>
                 <a class="mobile-nav-link" href="index.php?path=connexion">Connexion</a>
                 <?php
-            }
-            ?>
-            <a href="#contact" class="mobile-nav-link" onclick="closeMobileMenu()">📧 Contact</a>
+            } ?>
         </div>
     </div>

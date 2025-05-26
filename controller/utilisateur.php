@@ -42,15 +42,25 @@ function profile($input)
         if (isset($input['email']) && isset($input['nom']) && !empty($input['email']) && !empty($input['nom']) ) {
             $nom = htmlspecialchars($input['nom']);
             $email = htmlspecialchars($input['email']);
-            $update = $user->update($email, $nom, $_SESSION['type'], $_SESSION['email']);
-            if ($update == 1) {
+            if ($email != $_SESSION['email']) {
+                $info_user = $user->read($email);
+                if ($info_user->rowCount() > 0) {
+                    $msg = 'Cet email est déjà utiliser par un autre!';
+                }else{
+                    $update = $user->update($email, $nom, $_SESSION['type'], $_SESSION['email']);
+                }
+            }else{
+                $update = $user->update($email, $nom, $_SESSION['type'], $_SESSION['email']);
+            }
+            
+            if (isset($update) && $update == 1) {
                 $info = $user->read($email);
                 $mes_info = $info->fetch();
                 $_SESSION['email'] = $mes_info['email'];
                 $_SESSION['nom'] = $mes_info['nom'];
                 $msg = 'Les informations ont bien été mises à jour!';
             }else {
-                $msg = 'Une erreur s’est produite ! il se peut qu’un utilisateur ait possède cet email.Détail:'.$update;
+                $msg = 'Une erreur s’est produite !'.$update;
             }
             
         }else {
@@ -77,6 +87,14 @@ function profile($input)
         }
     }
     require_once('view/utilisateur/profile.php');
+}
+
+function apropos(){
+    require_once('view/nous/a_propos.php');
+}
+
+function contact(){
+    require_once('view/nous/contact.php');
 }
 
 function deconnexion()

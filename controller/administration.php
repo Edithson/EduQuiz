@@ -113,6 +113,13 @@ function matiere($input)
         }
     }elseif (isset($input['delete'])) {
         $id = htmlspecialchars($input['id']);
+        $all_questions = new Question();
+        $questions = $all_questions->read($id);
+        if ($questions->rowCount() > 0) {
+            while ($question = $questions->fetch()) {
+                $all_questions->delete($question['id']);
+            }
+        }
         $matiere = new Matiere();
         $matiere->delete($id);
     }

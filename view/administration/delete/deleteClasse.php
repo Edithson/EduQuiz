@@ -9,8 +9,19 @@ $classes = $cl->readAll();
 
 while ($classe = $classes->fetch()) {
     ?>
-    <h3 class="h3"><?=$classe['intitule']?><option value="<?=$classe['id']?>" class="classe"></option></h3>
-    <p class="p"><button value="<?=$classe['id']?>" class="updateb">Mettre à jour</button> <button value="<?=$classe['id']?>" class="deleteb danger">Supprimer</button></p>
+    <div class="subject-card">
+        <div class="subject-header">
+            <div>
+                <div class="subject-icon">📖</div>
+                <h3 class="subject-title matiere" value="<?=$classe['id']?>"><?=$classe['intitule']?></h3>
+            </div>
+            <div class="subject-actions">
+                <button class="action-btn edit-btn updateb" value="<?=$classe['id']?>" title="Modifier">✏️</button>
+                <button class="action-btn delete-btn deleteb" value="<?=$classe['id']?>" title="Supprimer">🗑️</button>
+            </div>
+        </div>
+        <p><?=$classe['description']?></p>
+    </div>
     <?php
 }
 ?>

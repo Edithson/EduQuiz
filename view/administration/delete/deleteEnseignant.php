@@ -6,7 +6,7 @@ $email = htmlspecialchars($_GET['id']);
 $eng = new Utilisateur();
 $eng->delete($email);
 
-$enseignants = $eng->readAll();
+$enseignants = $eng->read_eng();
     while ($eng = $enseignants->fetch()) {
         ?>
         <div class="subject-card">

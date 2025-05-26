@@ -37,6 +37,19 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
+.user_box_profil{
+    position: relative;
+    margin: 0 auto;
+    width: 90%;
+    background: linear-gradient(135deg, #93a5fc 0%, #dbb9fd 100%);
+    color: black;
+    font-weight: bold;
+    z-index: 100;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
 
 .drap{
     position: fixed;

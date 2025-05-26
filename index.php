@@ -4,11 +4,12 @@ require_once('controller/accueil.php');
 require_once('controller/utilisateur.php');
 require_once('controller/Administration.php');
 
-$_SESSION['type'] = 3;
-$_SESSION['auth'] = true;
-$_SESSION['admin'] = 1;
-$_SESSION['email'] = "jeremi@gmail.com";
-$_SESSION['super_admin'] = 1;
+// $_SESSION['type'] = 3;
+// $_SESSION['auth'] = true;
+// $_SESSION['admin'] = 1;
+// $_SESSION['email'] = "jeremi@gmail.com";
+// $_SESSION['nom'] = "jeremi";
+// $_SESSION['super_admin'] = 1;
 
 if (isset($_GET['path']) && !empty($_GET['path'])) {
     if ($_GET['path'] == 'accueil') {
@@ -37,6 +38,10 @@ if (isset($_GET['path']) && !empty($_GET['path'])) {
         filiere($_POST);
     }elseif ($_GET['path'] == 'profile' && isset($_SESSION['type'])) {
         profile($_POST);
+    }elseif ($_GET['path'] == 'apropos') {
+        apropos();
+    }elseif ($_GET['path'] == 'contact') {
+        contact();
     }else {
         accueil();
     }

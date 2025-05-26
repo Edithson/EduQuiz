@@ -2,14 +2,36 @@
 
 require_once('../../../model/Db.php');
 require_once('../../../model/Filiere.php');
+require_once('../../../model/Classe.php');
 
-Filiere::delete($_GET['id']);
-$specialites = Filiere::readAll();
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $id_filiere = htmlspecialchars($_GET['id']);
+    $all_classe = new Classe();
+    $classes = $all_classe->readAll_Classe_Sp($id_filiere);
+    if ($classes->rowCount() > 0) {
+        while ($classe = $classes->fetch()) {
+            $all_classe->delete($classe['id']);
+        }
+    }
+    Filiere::delete($id_filiere);
+    $specialites = Filiere::readAll();
+}
 
 while ($filiere = $specialites->fetch()) {
     ?>
-    <h3 class="h3"><?=$filiere['nom']?><option value="<?=$filiere['id']?>" class="filiere"></option></h3>
-    <p class="p">Description : <?=$filiere['description']?><br><button value="<?=$filiere['id']?>" class="updateb">Mettre à jour</button> <button value="<?=$filiere['id']?>" class="deleteb danger">Supprimer</button></p>
+    <div class="subject-card">
+        <div class="subject-header" style="height: 200px;">
+            <div>
+                <div class="subject-icon">📖</div>
+                <h3 class="subject-title matiere" value="<?=$filiere['id']?>"><?=$filiere['nom']?></h3>
+            </div>
+            <div class="subject-actions">
+                <button class="action-btn edit-btn updateb" value="<?=$filiere['id']?>" title="Modifier">✏️</button>
+                <button class="action-btn delete-btn deleteb" value="<?=$filiere['id']?>" title="Supprimer">🗑️</button>
+            </div>
+        </div>
+        <p><?=$filiere['description']?></p>
+    </div>
     <?php
 }
 ?>
