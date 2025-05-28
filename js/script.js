@@ -1,5 +1,5 @@
+
 window.onload = function(){
-    
 
     document.getElementById('show').addEventListener('click', function(e){
         form = document.getElementById('drap')

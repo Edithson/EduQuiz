@@ -3,95 +3,112 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AutoQuiz</title>
-    <link rel="stylesheet" href="styles/style1.css" media="screen and ( min-width:750px")>
-    <link rel="stylesheet" href="styles/style2.css" media="screen and ( max-width:749px")>
-    <style>
-        
-    </style>
+    <title>EduQuiz</title>
+    <link rel="stylesheet" href="styles/style1.css" media="screen and ( min-width:720px")>
+    <link rel="stylesheet" href="styles/style2.css" media="screen and ( max-width:720px")>
+
+    <link rel="stylesheet" href="styles/style3.css">
+
 </head>
 <body>
-    <section id="conteneur">
+
+    <div class="stars" id="stars"></div>
+    
+    <div class="floating-elements">
+        <div class="floating-book">📚</div>
+        <div class="floating-pencil">✏️</div>
+        <div class="floating-lightbulb">💡</div>
+    </div>
+    
+    <section id="conteneur" class="user_box">
         <div id="accueil">
-            <h2>Bienvenue dans Quiz Generetor</h2>
+            <h2>Bienvenue sur EduQuiz</h2>
             <form name="formulaire">
                 <p class="msg">Les règles du jeu sont simples : répondez aux questions et devenez millionnaire. Vous avez droit à 3 jokers pour vous aide (le coup de téléphone a un ami(e), le 50/50 et le vote du public). Chaque joker ne peut être utiliser qu’une et une seule fois.</p>
                 <p class="msg">Vous disposés de 3 vie</p>
-                <br><p class="msg">NB : les points gagnés dans ce jeu ne servent que d’indice pour évaluer votre niveau au cours d’une partie</p>
-                <br><br><input id="commercer" type="button" value="commencer le jeux">
+                <p class="msg">NB : les points gagnés dans ce jeu ne servent que d’indice pour évaluer votre niveau au cours d’une partie</p>
+                <br><input id="commercer" type="button" class="cta-button" value="Commencer le jeux">
             </form>
         </div>
-    <section id="tolk">
-        <p>❤ = <span id="vie">3</span></p>
-        <div class="outil" id="bordure1"><img id="outil1" src="medias/IMG_5053.JPG" alt="le coup de téléphone" srcset="" class="imgG1"></div>
-        <div class="outil" id="bordure2"><div id="outil2">50/50</div></div>
-        <div class="outil" id="bordure3"><img id="outil3" src="medias/IMG_5055.PNG" alt="le vote du public" srcset="" class="imgG1"></div>
+        <section id="tolk">
+            <p>❤ = <span id="vie">3</span></p>
+            <div class="outil" id="bordure1"><img id="outil1" src="medias/IMG_5053.JPG" alt="le coup de téléphone" srcset="" class="imgG1"></div>
+            <div class="outil" id="bordure2"><div id="outil2">50/50</div></div>
+            <div class="outil" id="bordure3"><img id="outil3" src="medias/IMG_5055.PNG" alt="le vote du public" srcset="" class="imgG1"></div>
 
-        <div id="outilSon" class="outil"><img src="medias/IMG_5062.PNG" alt="son" srcset="" id="son"></div>
-        <img src="medias/2965279.jpg" alt="le coup de téléphone" srcset="" class="outil" id="parametre">
-    </section>
-    <p id="mtt">Points actuels<br><span id="montantActuel">0</span> pts</p>
-    <div id="gain">
-        <div id="niveau"> <div id="barre"></div> </div>
-        <p> 30 pts</p><br>
-        <p> 20 pts</p><br>
-        <p> 10 pts</p><br>
-        <p> 0 pt</p>
-    </div>
-    <div id="public">
-        <p>Vote de la salle de classe</p>
-        <table>
-            <tr>
-                <th>A : </th>
-                <th id="t1"></th>
-                <th><div id="R1"></div></th>
-            </tr>
-            <tr>
-                <th>B : </th>
-                <th id="t2"></th>
-                <th><div id="R2"></div></th>
-            </tr>
-            <tr>
-                <th>C : </th>
-                <th id="t3"></th>
-                <th><div id="R3"></div></th>
-            </tr>
-            <tr>
-                <th>D : </th>
-                <th id="t4"></th>
-                <th><div id="R4"></div></th>
-            </tr>
-        </table>
-        <input id="publicOk" type="button" value="ok">
-    </div>
-    <div id="perdu">
-        <h2>Nous vous remercions d'avoir jouer</h2><br>
-        <h2 id="score"></h2><br><br>
-        <a id="nouvellePartie" href="../index.php">Accueil</a>
-    </div>
-       
-    <section id="questions">
-        <div id="libelle"></div><br><br>
-        <div id="reponse">
-            <div id=Q1 onclick="reponseUtilisateur = 1"></div><br><br>
-            <div id=Q2 onclick="reponseUtilisateur = 2"></div><br><br>
-            <div id=Q3 onclick="reponseUtilisateur = 3"></div><br><br>
-            <div id=Q4 onclick="reponseUtilisateur = 4"></div><br><br>
+            <div id="outilSon" class="outil"><img src="medias/IMG_5062.PNG" alt="son" srcset="" id="son"></div>
+            <img src="medias/2965279.jpg" alt="paramètre" srcset="" class="outil" id="parametre">
+        </section>
+        <div id="mtt-wrapper">
+            <p id="mtt">Points actuels : <span id="montantActuel">0</span> pts</p>
         </div>
+        <div id="gain-wrapper">
+            <div id="gain">
+                <div id="niveau">
+                    <div id="barre"></div>
+                </div>
+                <p>30 pts</p><br>
+                <p>20 pts</p><br>
+                <p>10 pts</p><br>
+                <p>0 pt</p>
+            </div>
+        </div>
+        <div id="public">
+            <p>Vote de la salle de classe</p>
+            <table>
+                <tr>
+                    <th>A : </th>
+                    <th id="t1"></th>
+                    <th><div id="R1"></div></th>
+                </tr>
+                <tr>
+                    <th>B : </th>
+                    <th id="t2"></th>
+                    <th><div id="R2"></div></th>
+                </tr>
+                <tr>
+                    <th>C : </th>
+                    <th id="t3"></th>
+                    <th><div id="R3"></div></th>
+                </tr>
+                <tr>
+                    <th>D : </th>
+                    <th id="t4"></th>
+                    <th><div id="R4"></div></th>
+                </tr>
+            </table>
+            <input id="publicOk" class="cta-button" type="button" value="ok">
+        </div>
+        <div id="perdu">
+            <h2>Nous vous remercions d'avoir jouer</h2><br>
+            <h2 id="score"></h2><br><br>
+            <a id="nouvellePartie" class="cta-button" href="../index.php">Accueil</a>
+        </div>
+        
+        <section id="questions">
+            <div id="libelle"></div><br><br>
+            <div id="reponse">
+                <div id=Q1 onclick="reponseUtilisateur = 1"></div>
+                <div id=Q2 onclick="reponseUtilisateur = 2"></div>
+                <div id=Q3 onclick="reponseUtilisateur = 3"></div>
+                <div id=Q4 onclick="reponseUtilisateur = 4"></div>
+            </div>
+        </section>
+        <div id="credit">
+            <p>Certaines fonctionnalités de ce jeu sont encore en cour de création…</p>
+            <p>Crédit :</p>
+            <ul>
+                <li>Développé par : Edithson MOAFO</li>
+                <li>Hébergement : en cour de préparation</li>
+            </ul>
+            <input type="button" class="cta-button" value="ok" id="parametreOk">
+        </div>
+        <div id="drap"</div>
     </section>
-    <div id="credit">
-        <p>Certaines fonctionnalités de ce jeu sont encore en cour de création…</p>
-        <p>Crédit :</p>
-        <ul>
-            <li>Développé par : Edithson MOAFO</li>
-            <li>Hébergement : en cour de préparation</li>
-        </ul>
-        <input type="button" value="ok" id="parametreOk">
-    </div>
-    <a class="denger" href="../index.php">Quiter</a>
-    <div id="drap"></div>
-    </section>
+    <a class="cta-button-quiter quiter" href="../index.php">Quiter</a>
     <!--9 16 426-->
+
+    <script src="script/design.js"></script>
     <script src="script/script.js"></script>
 </body>
 </html>

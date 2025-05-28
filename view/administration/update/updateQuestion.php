@@ -41,7 +41,6 @@ $rep = $question['reponse'];
 
 <script>
     document.getElementById('hide').addEventListener('click', function(e){
-        e.preventDefault()
-        document.getElementById('drap').style.display='none';
+        window.location.reload();
     })
 </script>

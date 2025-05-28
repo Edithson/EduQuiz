@@ -1,77 +1,82 @@
-body html {
-    height: 100%;
-    margin: 0;
-  }
+
 #libelle{
-    display: table-cell;
-    width: 350px;
-    height: 90px;
+    display: inline-block;
+    width: 99%;
+    min-height: 90px;
     vertical-align: middle;
     border-radius:10px;
-    background-color: rgb(18, 19, 51);
     text-align: center;
     margin: 0 auto;
     margin-top:10px;
+    margin-bottom: 10px;
 }
 #Q1, #Q2, #Q3, #Q4{
+    margin-top: 10px;
     display: inline-block;
     vertical-align: middle;
-    line-height: 60px;
     text-align: center;
-    width: 300px;
-    height: 60px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 98%;
+    height: auto;
+    min-height: 70px;
     border-radius:10px;
-    background-color: rgb(18, 19, 51);
-    margin-top: -15px;
 }
 #Q1:hover, #Q2:hover, #Q3:hover, #Q4:hover, #libelle:hover{
-    background-color: rgb(16, 36, 126);
     cursor: grab;
 }
 #questions{
     display: block;
-    padding-top:2px;
-    width: 350px;
-    height: 480px;
-    margin: 170 auto;
-    background-color: rgba(187, 99, 99, 0.2);
+    padding: 10px;
+    width: 90%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 70%;
+    border-radius: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    background-color: rgba(255, 1, 1, 0.2);
 }
 #reponse{
-    width: 300px;
-    height: 400px;
+    text-indent: ju;
+    width: 95%;
+    height: auto;
     margin: 0 auto;
 }
 #perdu, #accueil{
     padding: 10px;
     display: none;
-    width: 350px;
+    width: 80%;
     height: 450px;
     position: absolute;
-    background-color: rgb(5, 7, 44);
+    background-color: rgb(155, 142, 27);
     opacity: 0.8;
     font-size: x-large;
     text-align: center;
     color: white;
     top: 50%;
-    left: 50%;
+    left: 51.5%;
     transform: translate(-50%, -50%);
+    border-radius: 10px;
     z-index: 4;
 }
 #accueil{
-    display: inline-block;
+    display: block;
 }
 body{
+    
     color: white;
     font-weight: bold;
     font-size: medium;
     background-color: rgb(11, 6, 34);
-    margin: auto 5;
-    min-width: 500px;
-    margin-left: 0px;
-    padding-top: 0px;
+    width: 90%;
+    max-width: 400px;
+    height: 100vh;
+    text-align: center;
+    margin: 0 auto;
 }
 #score{
     display: inline-block;
+    margin-top: 10px;
 }
 #tolk{
     float: left;
@@ -94,7 +99,7 @@ body{
     position: absolute;
     color: black;
     background-color: white;
-    font-size: medium;
+    font-size: small;
     text-align: center;
     padding-top: 7px;
     height: 27px;
@@ -120,14 +125,20 @@ body{
 }
 #parametre{
     position: absolute;
+    right: 5%;
     margin-top: 150px;
-    margin-left: 200px;
+    /* position: absolute;
+    margin-top: 150px;
+    margin-left: 200px; */
     width: 30px;
     height: 30px;
     border-radius: 20px;
 }
 #outil1, #outil2, #outil3{
     margin-bottom: 10px;
+}
+#outil1, #outil3{
+    margin-left: 0px;
 }
 .imgG1{
     width: 40px;
@@ -152,20 +163,28 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    padding: 10px;
+    z-index: 4;
 }
 #publicOk{
     display: inline-block;
     width: 100px;
     margin: 0 auto;
 }
-#gain{
-    transform: rotate(90deg);
+#gain-wrapper {
     position: absolute;
-    overflow: hidden;
-    margin-top: -110px;
-    margin-left: 265px;
+    top: 9%;
+    right: 27%;
+    transform: translateY(-50%);
+    
+}
+
+#gain {
+    transform: rotate(90deg);
+    transform-origin: center;
     width: 15px;
     height: 220px;
+    overflow: hidden;
 }
 #niveau{
     margin-right: 5px;
@@ -182,44 +201,41 @@ body{
     background-color: rgb(231, 147, 147);
 }
 #conteneur{
+    margin-top: 10px;
     padding: 20px;
     position: absolute;
     padding-top: 25px;
-    width: 400px;
-    height: 100%;
-    background-color: rgb(9, 3, 43);
-    overflow: hidden;
+    width: 100%;
+    height: 100vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    margin-top: 10px;
+    padding-left: 0;
+    padding-right: 0;
 }
 #drap{
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 400px;
-    height: 570px;
-    background-color: rgba(168, 27, 114, 0.2);
+    width: 100%;
+    height: 150%;
+    z-index: 2;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+#mtt-wrapper {
+    position: absolute;
+    top: 2%;
+    right: 30%;
+    transform: translateY(-50%);
+    transform: translateX(60%);
 }
 #mtt{
-    margin-top: -3px;
-    text-align: right;
-    margin-right: 20px;
+    transform-origin: center;
+    width: auto;
 }
-#nouvellePartie{
-    text-align: center;
-    text-decoration: none;
-    width: 150px;
-    height: 50px;
-    color: black;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 1px 2px 2px 2px black;
-}
-#nouvellePartie:active{
-    box-shadow: 0px 1px 1px 1px black;
-}
+
 .msg{
     font-size: x-small;
     font-weight: lighter;
@@ -234,6 +250,8 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    padding: 10px;
+    border-radius: 10px;
 }
 #parametreOk{
     margin: 0 auto;
@@ -249,4 +267,38 @@ li{
     font-weight: bold;
     margin-top: -100px;
     margin-left: 40%;
+}
+#tolk p{
+    position: absolute;
+    top: 65px;
+}
+
+.cta-button {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    display: block;
+    margin: 0 auto;
+    font-family: inherit;
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+a{
+    text-decoration: none;
+}
+.quiter{
+    display: inline-block;
+    width: auto;
+    left: 50%;
+    transform: translate(3%);
+    margin-top: 50px;
 }

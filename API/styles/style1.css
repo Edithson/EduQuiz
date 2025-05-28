@@ -4,7 +4,8 @@ body html {
   }
 #libelle{
     width: 500px;
-    height: 40px;
+    height: auto;
+    min-height: 40px;
     padding-top:10px;
     border-radius:10px;
     background-color: rgb(18, 19, 51);
@@ -14,60 +15,47 @@ body html {
 }
 #Q1, #Q2, #Q3, #Q4{
     width: 270px;
-    height: 30px;
-    margin-left: 5px;
-    position: absolute;
+    height: 40px;
+    margin: 5px;
+    position: relative;
     text-align: center;
     padding-top:5px;
     padding-bottom:10px;
     border-radius:10px;
-    background-color: rgb(18, 19, 51);
+    float: left;
 }
-#Q1{
-    margin-top: 5px;
-}
-#Q2{
-    margin-top: -30px;
-    margin-left: 310px;
-}
-#Q3{
-    margin-top: -5px;
-}
-#Q4{
-    margin-top: -41px;
-    margin-left: 310px;
-}
+
 #Q1:hover, #Q2:hover, #Q3:hover, #Q4:hover, #libelle:hover{
-    background-color: rgb(16, 36, 126);
     cursor: grab;
 }
 #questions{
     display: block;
     padding-top:2px;
     width: 600px;
-    height: 220px;
+    height: auto;
+    min-height: 220px;
     margin: 60 auto;
-    background-color: rgba(12, 1, 53, 0.2);
+    background-color: rgba(12, 1, 53, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 #reponse{
-    width: 585px;
+    width: 560px;
     height: 115px;
     /* display: grid;
     grid-template-columns: repeat(4,150px);
     grid-template-rows: repeat(4,60px);
     grid-gap: 7px; */
-    margin: 0 auto;
+    margin: -30 auto;
 }
 #perdu, #accueil{
     display: none;
     width: 400px;
     height: 450px;
     position: absolute;
-    background-color: rgb(5, 7, 44);
     opacity: 0.9;
     font-size: x-large;
     text-align: center;
-    color: white;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -77,10 +65,7 @@ body html {
     display: inline-block;
 }
 body{
-    color: white;
     font-weight: bold;
-    background-color: rgb(11, 6, 34);
-    margin: auto 5;
     min-width: 500px;
     margin-left: 0px;
     padding-top: 0px;
@@ -119,6 +104,7 @@ body{
     margin-left: 6px;
     margin-top: 8px;
     border-radius: 20px;
+    font-size: 12px;
 }
 #son{
     margin-top: 2.45px;
@@ -176,6 +162,10 @@ body{
     margin-left: 670px;
     width: 140px;
     height: 220px;
+    font-weight: lighter;
+}
+#gain p{
+    margin-top: 8px;
 }
 #niveau{
     margin-right: 5px;
@@ -183,13 +173,13 @@ body{
     float: left;
     width: 15px;
     height: 220px;
-    background-color: rgb(224, 39, 39);
+    background-color: rgb(222, 137, 0);
 }
 #barre{
     border-radius: 5px;
     width: 15px;
     height: 215px;
-    background-color: rgb(231, 147, 147);
+    background-color: rgb(243, 168, 168);
 }
 #conteneur{
     position: absolute;
@@ -201,6 +191,9 @@ body{
     left: 50%;
     transform: translate(-50%, -50%);
     padding-top: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-top: 10px;
 }
 #drap{
     position: absolute;
@@ -209,26 +202,14 @@ body{
     transform: translate(-50%, -50%);
     width: 760px;
     height: 600px;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(176, 59, 255, 0.301);
 }
 #mtt{
     margin-top: -3px;
     text-align: right;
     margin-right: 20px;
 }
-#nouvellePartie{
-    text-align: center;
-    text-decoration: none;
-    width: 150px;
-    height: 50px;
-    color: black;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 1px 2px 2px 2px black;
-}
-#nouvellePartie:active{
-    box-shadow: 0px 1px 1px 1px black;
-}
+
 .msg{
     font-size: x-small;
     font-weight: lighter;

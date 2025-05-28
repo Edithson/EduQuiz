@@ -78,8 +78,8 @@ for (let index = 1; index < 11; index++) {
 }
 
 if (data == null) {
-    alert("Aucun cookies trouvés; retour a la page d'accueil")
-    window.location.href='../index.php'
+    // alert("Aucun cookies trouvés; retour a la page d'accueil")
+    //window.location.href='../index.php'
 }
 
 console.log('nombre de question : ')
@@ -133,7 +133,7 @@ function getCookie2(cookieName)
         setTimeout(() => {
             document.getElementById("drap").style.display = "none",
             afficherQuestions(data, nbr)
-        }, 35000);
+        }, 25000);
     })
     
     var x
@@ -145,7 +145,7 @@ function getCookie2(cookieName)
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
-            if (x && questionsDejaPoser.length < data.length && score < 30000000) {
+            if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                     console.log ("choix interne2 = "+nbr)
                     setTimeout(() => {
@@ -161,7 +161,7 @@ function getCookie2(cookieName)
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
-            if (x && questionsDejaPoser.length < data.length && score < 30000000) {
+            if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                 console.log ("choix interne2 = "+nbr)
                 setTimeout(() => {
@@ -177,7 +177,7 @@ function getCookie2(cookieName)
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
-            if (x && questionsDejaPoser.length < data.length && score < 30000000) {
+            if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                 console.log ("choix interne2 = "+nbr)
                 setTimeout(() => {
@@ -193,7 +193,7 @@ function getCookie2(cookieName)
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
-            if (x && questionsDejaPoser.length < data.length && score < 30000000) {
+            if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                 console.log ("choix interne2 = "+nbr)
                 setTimeout(() => {
@@ -306,7 +306,9 @@ function continuer(data, nbr) {
                 showSpeak("vous auriez due choisir"+data[nbr].proposition_1)
                 indiceBonneReponse(4)
             }
-        indicationMauvaiseReponse(userAnswer())
+            setTimeout(() => {
+                indicationMauvaiseReponse(userAnswer())
+            }, 2000);
 
         if (vie == 0) {
             return false
@@ -380,7 +382,7 @@ function vousAvezPerdu(params) {
         document.getElementById("perdu").style.transition = "2s"
         parler(rempliqueFinale[(Math.floor(Math.random()*((rempliqueFinale.length-1)-0+1))+0)], voix5)
         document.getElementById("score").textContent = ("vous avez gagner un total de "+params+" pts")
-        document.getElementById("score").style.color = "white"
+        document.getElementById("score").style.color = "black"
     }, 5000);
 
     // document.getElementById("questions").style.display = "none"
@@ -391,7 +393,7 @@ function coupDeFille(data, nbr, outils) {
     setTimeout(() => {
         const music1=new Audio('medias/son/tel.mp3');
         music1.play();
-    }, 2000);
+    }, 3000);
 
     setTimeout(() => {
         parler(dialogue1[(Math.floor(Math.random()*((dialogue1.length-1)-0+1))+0)], voix5)

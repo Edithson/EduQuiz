@@ -95,11 +95,5 @@ require_once('view/layout/nav_bar.php');
             $('#contenu').load('view/administration/delete/deleteFiliere.php?id='+id)
         })
     }
-    $(document).ready(function(){
-        $("#contenu p").hide()
-        $("h3").click(function(){
-            $(this).next("p").slideToggle("slow").siblings("p:visible").slideUp("slow");
-        })
-    })
     
 </script>

@@ -15,7 +15,9 @@
     <!-- <link rel="stylesheet" href="templete/style3.css"> -->
 
     <script>
-        function stopMe() {/*
+        function stopMe() {
+            
+            /*
             document.getElementById('drap').style.display='none';
             document.getElementById('user_form').addEventListener('click', function(event) {
                 event.stopPropagation(); // Empêche la propagation de l'événement vers le conteneur

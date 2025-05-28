@@ -25,7 +25,7 @@ $matieres = $matieres->fetch();
     <label for="">Nom du cour : </label><br>
     <input type="text" name="nom" value="<?=$matieres['nom']?>" class="filter-input" required><br><br>
     <label for="">Description : </label><br>
-    <textarea name="desc" id="" cols="30" rows="2" placeholder="facultative" class="filter-input" required><?=$matieres['description']?></textarea><br><br>
+    <textarea name="desc" id="" cols="20" rows="2" placeholder="facultative" class="filter-input" required><?=$matieres['description']?></textarea><br><br>
 
     <label for="">Classes consernées</label>
     <div class="classement">
@@ -72,7 +72,6 @@ $matieres = $matieres->fetch();
 
     <script>
         document.getElementById('hide').addEventListener('click', function(e){
-            e.preventDefault()
-            document.getElementById('drap').style.display='none';
+            window.location.reload();
         })
     </script>

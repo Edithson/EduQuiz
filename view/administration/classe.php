@@ -93,7 +93,7 @@ require_once('view/layout/nav_bar.php');
                                 <button class="action-btn delete-btn deleteb" value="<?=$classe['id']?>" title="Supprimer">🗑️</button>
                             </div>
                         </div>
-                        <p><?=$classe['description']?></p>
+                        <!-- <p><?=$classe['description']?></p> -->
                     </div>
                     <?php
                 }
@@ -125,10 +125,4 @@ require_once('view/layout/nav_bar.php');
 
         })
     }
-    $(document).ready(function(){
-        $("p").hide()
-        $("h3").click(function(){
-            $(this).next("p").slideToggle("slow").siblings("p:visible").slideUp("slow");
-        })
-    })
 </script>

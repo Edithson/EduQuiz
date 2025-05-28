@@ -75,7 +75,6 @@
                             <button class="action-btn delete-btn deleteb" value="<?=$eng['email']?>" title="Supprimer">🗑️</button>
                         </div>
                     </div>
-                    <p><?=$classe['description']?></p>
                 </div>
                 <?php
             }
@@ -105,11 +104,4 @@
             $('#contenu').load('view/administration/delete/deleteEnseignant.php?id='+id)
         })
     }
-    $(document).ready(function(){
-        $("p").hide()
-        $("h3").click(function(){
-            $(this).next("p").slideToggle("slow").siblings("p:visible").slideUp("slow");
-        })
-    })
-
 </script>
