@@ -17,7 +17,7 @@
                 if (isset($_SESSION['auth']) && $_SESSION['auth']==true) {
                     ?>
                     <li class="nav-item dropdown">
-                        <a href="#fonctionnalites" class="nav-link">
+                        <a href="#fonctionnalites" class="nav-link" id="fonctionnalites">
                             ⚙️ Fonctionnalités <span class="dropdown-arrow">▼</span>
                         </a>
                         <div class="dropdown-content">
@@ -116,11 +116,18 @@
     </div>
 
     <script>
-
+        
         const currentUrl = window.location.href; // Récupère l'URL complète
-    
-        console.log("Chemin principale = ", getMainPath(currentUrl));
-    
+        let cheminPrincipal = getMainPath(currentUrl)
+        if (cheminPrincipal == '' || cheminPrincipal == null) {
+            cheminPrincipal = 'accueil'
+        }
+        if (cheminPrincipal == 'question' || cheminPrincipal == 'enseignant' || cheminPrincipal == 'matiere' || cheminPrincipal == 'classe' || cheminPrincipal == 'filiere') {
+            cheminPrincipal = 'fonctionnalites'
+        }
+        console.log("Chemin principale = ", cheminPrincipal);
+        
+        //document.getElementById(cheminPrincipal).style.background = 'linear-gradient(45deg,rgb(252, 155, 155),rgb(243, 98, 98))'
         //suppression de la classe active
         const elements = document.querySelectorAll('.nav-link');
         elements.forEach(function(element) {
@@ -132,10 +139,10 @@
         // });
     
         //activation de l'onglet courant
-        let currentOnglet = document.getElementById(''+currentUrl)
-        
-        // currentOnglet.classList.toggle('active');
-        currentOnglet.style.color = 'red';
+        let currentOnglet = document.getElementById(''+cheminPrincipal)
+        currentOnglet.classList.add('active');
+        //document.getElementById(currentUrl).style.background = 'linear-gradient(45deg,rgb(252, 155, 155),rgb(243, 98, 98))'
+
         console.log(currentOnglet)
             
             

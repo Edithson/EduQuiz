@@ -22,10 +22,8 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 .user_box{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); /* Centre l'élément */
+    position: relative;
+    margin: 0 auto;
     width: 80%;
     max-width: 500px;
     background: linear-gradient(135deg, #93a5fc 0%, #dbb9fd 100%);
@@ -385,3 +383,15 @@ Personnalisation de la barre de défilement
     width: 8px;
 }
 */
+
+#compte_action{
+    width: auto;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+#compte_action a{
+    text-decoration: none;
+    display: block;
+    margin-right: 10px;
+    color: #000000;
+}

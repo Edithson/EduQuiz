@@ -325,15 +325,20 @@ require_once('view/layout/nav_bar.php');
             </p>
         </div>
 
+            <?php
+            if (isset($msg)) {
+                echo $msg;
+            }
+            ?>
         <div class="contact-grid">
             <div class="contact-form-section">
                 <h2 class="form-title">💬 Envoyez-nous un message</h2>
                 <p class="form-subtitle">Nous vous répondrons dans les plus brefs délais</p>
                 
-                <form id="contact-form" onsubmit="submitForm(event)">
+                <form id="contact-form" action="index.php?path=contact/message" method="post">
                     <div class="form-group">
                         <label for="name" class="form-label">👤 Votre nom complet</label>
-                        <input type="text" id="name" name="name" class="filter-input" required 
+                        <input type="text" id="name" name="nom" class="filter-input" required 
                                placeholder="Ex: Jean Dupont">
                     </div>
                     
@@ -345,7 +350,7 @@ require_once('view/layout/nav_bar.php');
                     
                     <div class="form-group">
                         <label for="subject" class="form-label">📋 Sujet de votre message</label>
-                        <select id="subject" name="subject" class="filter-select" required>
+                        <select id="subject" name="sujet" class="filter-select" required>
                             <option value="">Choisissez un sujet...</option>
                             <option value="question">❓ Question générale</option>
                             <option value="bug">🐛 Signaler un problème</option>
@@ -369,21 +374,21 @@ require_once('view/layout/nav_bar.php');
             </div>
 
             <div class="contact-info-section">
-                <div class="contact-card" onclick="window.open('mailto:contact@eduquiz.app')">
+                <div class="contact-card" onclick="window.open('mailto:eduquizplus@gmail.com')">
                     <span class="contact-icon">📧</span>
                     <h3 class="contact-title">Email</h3>
                     <div class="contact-details">
-                        <a href="mailto:contact@eduquiz.app" class="contact-link">contact@eduquiz.app</a><br>
+                        <a href="mailto:eduquizplus@gmail.com" class="contact-link">eduquizplus@gmail.com</a><br>
                         <small>Réponse sous 24h</small>
                     </div>
                 </div>
 
-                <div class="contact-card" onclick="window.open('tel:+221123456789')">
+                <div class="contact-card" onclick="window.open('tel:+237658995265')">
                     <span class="contact-icon">📱</span>
                     <h3 class="contact-title">Téléphone</h3>
                     <div class="contact-details">
-                        <a href="tel:+221123456789" class="contact-link">+221 12 345 67 89</a><br>
-                        <small>Lun-Ven: 8h-18h (GMT)</small>
+                        <a href="tel:+237658995265" class="contact-link">+237 658 995 265</a><br>
+                        <small>Lun-Ven: 8h-18h (GMT+1)</small>
                     </div>
                 </div>
 
@@ -391,8 +396,8 @@ require_once('view/layout/nav_bar.php');
                     <span class="contact-icon">🏢</span>
                     <h3 class="contact-title">Adresse</h3>
                     <div class="contact-details">
-                        123 Avenue de l'Éducation<br>
-                        Dakar, Sénégal<br>
+                        Douala<br>
+                        Littoral, Cameroun<br>
                         <small>Siège social</small>
                     </div>
                 </div>
@@ -402,7 +407,7 @@ require_once('view/layout/nav_bar.php');
                     <h3 class="contact-title">Horaires</h3>
                     <div class="contact-details">
                         Lundi - Vendredi<br>
-                        8h00 - 18h00 (GMT)<br>
+                        8h00 - 18h00 (GMT+1)<br>
                         <small>Support disponible</small>
                     </div>
                 </div>

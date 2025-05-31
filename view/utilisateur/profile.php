@@ -44,6 +44,10 @@ require_once('view/layout/nav_bar.php');
                     <label for="">Confirmation du nouveau mot de passe : </label>
                     <input type="password" name="password3" class="filter-input"><br><br>
                     <input type="submit" value="Mettre à jour" name="update2" class="cta-button">
+                    
+                    <div id="compte_action">
+                        <a href="index.php?path=user/reinitialisation">Mot de passe oublier</a>
+                    </div>
                 </form>
             </div>
         </section>

@@ -11,10 +11,10 @@ ruetaerc = "noshtidEsuaGofaoMouohnoF"
 dialogue4B = ["c'est difficile, mais je crois que c'est entre ", "j'hesite un peut entre ", "je sais pas trop, entre ", "je suis dans le doute entre "]
 dialogue5 = ["votre professeur a deja fait son choix", "le chois de votre professeur a été fais"]
 dialogue6 = ["il n'a pas l'ère très sur de lui", "quoi que votre ami ait pu dire, le dernier mot vous revient"]
-repliquePresentation1 = ["bienvenue dans, AutoQuiz"]
+repliquePresentation1 = ["bienvenue dans, EduQuiz"]
 repliquePresentation2 = ["sans plus tarder, commençon le jeux"]
 rempliqueFinale = ["vous avez a tout moment la possibilité de rejouer"]
-intro = ["Bienvenue dans, Auto Quiz, qui est une plateforme sur laquelle vous pouvez vous évaluer vous-même afin de connaitre votre niveau.", "Les règles du jeu sont simples, plus vous donnez de bonne réponse, plus votre score évolue", "Au cours du jeux, vous aurez une fois la possibilité de faire appel à un de vos professeur, de demander le vote de votre salle de classe et de demander l’aide de l’ordinateur.", "Sans plus tarder, commençons le jeu. Bonne chance à vous."]
+intro = ["Bienvenue dans, Edu Quiz, qui est une plateforme sur laquelle vous pouvez vous évaluer vous-même afin de connaitre votre niveau.", "Les règles du jeu sont simples, plus vous donnez de bonne réponse, plus votre score évolue", "Au cours du jeux, vous aurez une fois la possibilité de faire appel à un de vos professeur, de demander le vote de votre salle de classe et de demander l’aide de l’ordinateur.", "Sans plus tarder, commençons le jeu. Bonne chance à vous."]
 //createur: FONHOUO MOAFO Gaus Edithson
 
 outils = [0, 0, 0]
@@ -78,8 +78,8 @@ for (let index = 1; index < 11; index++) {
 }
 
 if (data == null) {
-    // alert("Aucun cookies trouvés; retour a la page d'accueil")
-    //window.location.href='../index.php'
+    alert("Aucune question trouvée; retour a la page d'accueil")
+    window.location.href='../index.php'
 }
 
 console.log('nombre de question : ')
@@ -133,7 +133,7 @@ function getCookie2(cookieName)
         setTimeout(() => {
             document.getElementById("drap").style.display = "none",
             afficherQuestions(data, nbr)
-        }, 25000);
+        }, 28000);
     })
     
     var x
@@ -142,9 +142,15 @@ function getCookie2(cookieName)
     })
 
         document.getElementById("Q1").addEventListener("click", function(){
+            let vie_interne = vie
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
+            if (vie_interne > vie) {
+                temps = 5000
+            }else{
+                temps = 2000
+            }
             if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                     console.log ("choix interne2 = "+nbr)
@@ -152,15 +158,21 @@ function getCookie2(cookieName)
                         setTimeout(afficherQuestions(data, nbr),
                         initialisationReponses(),
                         lireQuestion(data, nbr), 2000)
-                    }, 2000);
+                    }, temps);
             }else{
                 vousAvezPerdu(score)
             }
         })
         document.getElementById("Q2").addEventListener("click", function(){
+            let vie_interne = vie
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
+            if (vie_interne > vie) {
+                temps = 5000
+            }else{
+                temps = 2000
+            }
             if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                 console.log ("choix interne2 = "+nbr)
@@ -168,15 +180,21 @@ function getCookie2(cookieName)
                     setTimeout(afficherQuestions(data, nbr),
                     initialisationReponses(),
                     lireQuestion(data, nbr), 2000)
-                }, 2000);
+                }, temps);
             }else{
                 vousAvezPerdu(score)
             }
         })
         document.getElementById("Q3").addEventListener("click", function(){
+            let vie_interne = vie
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
+            if (vie_interne > vie) {
+                temps = 5000
+            }else{
+                temps = 2000
+            }
             if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                 console.log ("choix interne2 = "+nbr)
@@ -184,15 +202,21 @@ function getCookie2(cookieName)
                     setTimeout(afficherQuestions(data, nbr),
                     initialisationReponses(),
                     lireQuestion(data, nbr), 2000)
-                }, 2000);
+                }, temps);
             }else{
                 vousAvezPerdu(score)
             }
         })
         document.getElementById("Q4").addEventListener("click", function(){
+            let vie_interne = vie
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
+            if (vie_interne > vie) {
+                temps = 5000
+            }else{
+                temps = 2000
+            }
             if (x && questionsDejaPoser.length < data.length && score < 30) {
                 nbr = aleaUnique(min, max, questionsDejaPoser)
                 console.log ("choix interne2 = "+nbr)
@@ -200,7 +224,7 @@ function getCookie2(cookieName)
                     setTimeout(afficherQuestions(data, nbr),
                     initialisationReponses(),
                     lireQuestion(data, nbr), 2000)
-                }, 2000);
+                }, temps);
             }else{
                 vousAvezPerdu(score)
             }
@@ -306,9 +330,8 @@ function continuer(data, nbr) {
                 showSpeak("vous auriez due choisir"+data[nbr].proposition_1)
                 indiceBonneReponse(4)
             }
-            setTimeout(() => {
-                indicationMauvaiseReponse(userAnswer())
-            }, 2000);
+            indicationMauvaiseReponse(userAnswer())
+            
 
         if (vie == 0) {
             return false
@@ -363,17 +386,18 @@ function parler(texte, voix) {
 }
 
 function indiceBonneReponse(params) {
-    document.getElementById("Q"+params).style.backgroundColor = "green"
+    document.getElementById("Q"+params).style.background = "linear-gradient(45deg,rgb(189, 252, 155),rgb(98, 243, 100))"
 }
 
 function indicationMauvaiseReponse(params) {
-    document.getElementById("Q"+params).style.backgroundColor = "red"
+    document.getElementById("Q"+params).style.background = "linear-gradient(45deg,rgb(252, 155, 155),rgb(243, 98, 98))"
 }
 
 function initialisationReponses() {
-    for (let index = 1; index <= 4; index++) {
-        document.getElementById("Q"+index).style.backgroundColor = "midnightblue"
-    }
+    document.getElementById("Q1").style.background = "linear-gradient(135deg, #ad5bff 0%, #c3cbf4 100%"
+    document.getElementById("Q2").style.background = "linear-gradient(135deg, #c3cbf4 0%, #ad5bff 100%)"
+    document.getElementById("Q3").style.background = "linear-gradient(135deg, #ad5bff 0%, #c3cbf4 100%"
+    document.getElementById("Q4").style.background = "linear-gradient(135deg, #c3cbf4 0%, #ad5bff 100%)"
 }
 
 function vousAvezPerdu(params) {
@@ -424,7 +448,7 @@ function coupDeFille(data, nbr, outils) {
 
         setTimeout(() => {
             parler(dialogue4A[(Math.floor(Math.random()*((dialogue4A.length-1)-0+1))+0)]+tabx[0], voix4)
-            document.getElementById("Q"+tab2[0]).style.backgroundColor = "green"
+            document.getElementById("Q"+tab2[0]).style.background = "linear-gradient(45deg,rgb(155, 252, 163),rgb(103, 243, 98))"
             parler(dialogue5[(Math.floor(Math.random()*((dialogue5.length-1)-1+0))+0)], voix5)
         }, 12000);
     }, 8000);
@@ -450,7 +474,7 @@ function ordinateur(data, nombre) {
     } while (tab2.length < 3);
     setTimeout(() => {
         for (let index = 1; index < 3; index++) {
-            document.getElementById("Q"+tab2[index]).style.backgroundColor = "red"
+            document.getElementById("Q"+tab2[index]).style.background = "linear-gradient(45deg,rgb(252, 155, 155),rgb(243, 98, 98))"
         }
         document.getElementById("bordure2").style.backgroundColor = "red"
     }, 3000);
@@ -541,3 +565,4 @@ function aleaUnique(min, max, tab) {
         return "erreur, max < min"
     }
 }
+

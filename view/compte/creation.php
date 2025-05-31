@@ -14,22 +14,25 @@ require_once('view/layout/nav_bar.php');
     <div class="container">
 
         <section class="user_box">
-            <h2>Connectez vous afin d'accéder à l'interface d'administration</h2><br>
+            <h2>Créez votre compte pour une expériance plus optimale</h2><br>
             <?php
             if (isset($msg)) {
                 echo $msg;
             }
             ?>
-            <form action="index.php?path=connexion" method="post">
+            <form action="index.php?path=user/creation/store" method="post">
                 <label for="">Email : </label><br>
-                <input type="text" name="email" class="filter-input" required><br><br>
+                <input type="email" name="email" class="filter-input" required><br><br>
+                <label for="">Nom : </label><br>
+                <input type="text" name="nom" class="filter-input" required><br><br>
                 <label for="">Mot de passe : </label><br>
                 <input type="password" name="password" class="filter-input" required><br><br>
-                <input type="submit" value="Connexion" name="valider" class="cta-button">
+                <label for="">Confirmation mot de passe : </label><br>
+                <input type="password" name="password2" class="filter-input" required><br><br>
+                <input type="submit" value="Créer compte" name="valider" class="cta-button">
 
                 <div id="compte_action">
-                    <a href="index.php?path=user/reinitialisation">Mot de passe oublier</a>
-                    <a href="index.php?path=user/creation">Pas encore de compte</a>
+                    <a href="index.php?path=connexion">Déjà un compte</a>
                 </div>
             </form>
         </section>

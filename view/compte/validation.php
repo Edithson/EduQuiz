@@ -14,22 +14,28 @@ require_once('view/layout/nav_bar.php');
     <div class="container">
 
         <section class="user_box">
-            <h2>Connectez vous afin d'accéder à l'interface d'administration</h2><br>
+            <h2>Denierre ligne droite ;)</h2><br>
             <?php
             if (isset($msg)) {
                 echo $msg;
             }
             ?>
-            <form action="index.php?path=connexion" method="post">
-                <label for="">Email : </label><br>
-                <input type="text" name="email" class="filter-input" required><br><br>
-                <label for="">Mot de passe : </label><br>
-                <input type="password" name="password" class="filter-input" required><br><br>
-                <input type="submit" value="Connexion" name="valider" class="cta-button">
+            <form action="index.php?path=user/creation/validation" method="post">
+                <div style="display: none;">
+                    <input type="email" value="<?=$email?>" name="email" class="filter-input" required><br><br>
+                    <input type="text" value="<?=$nom?>" name="nom" class="filter-input" required><br><br>
+                    <input type="password" value="<?=$password?>" name="password" class="filter-input" required><br><br>
+                    <input type="password" value="<?=$password2?>" name="password2" class="filter-input" required><br><br>
+                    <input type="text" value="<?=$code?>" name="true_code">
+                </div><br>
+                
+                <label for="">Entrez votre code de vérification reçu par mail</label><br>
+                <input type="text" name="user_code" class="filter-input" required><br><br>
+
+                <input type="submit" value="Créer mon compte" name="valider" class="cta-button">
 
                 <div id="compte_action">
-                    <a href="index.php?path=user/reinitialisation">Mot de passe oublier</a>
-                    <a href="index.php?path=user/creation">Pas encore de compte</a>
+                    <a href="index.php?path=connexion">Déjà un compte</a>
                 </div>
             </form>
         </section>
