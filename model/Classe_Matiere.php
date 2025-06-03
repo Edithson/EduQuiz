@@ -56,7 +56,7 @@ class Classe_Matiere
     {
         $db = new Db();
         $cnx = $db->getCnx();
-        $classe_matiere = $cnx->prepare('SELECT matiere.id AS id_matiere, matiere.nom AS nom_mat, matiere.description FROM matiere, classe_matiere, classe, question WHERE classe_matiere.id_matiere=matiere.id AND classe_matiere.id_classe=classe.id AND classe.id=? AND matiere.id = question.id_matiere GROUP BY question.id_matiere HAVING COUNT(question.id_matiere)>3');
+        $classe_matiere = $cnx->prepare('SELECT matiere.id AS id_matiere, matiere.nom AS nom_mat, matiere.description AS `description` FROM matiere, classe_matiere WHERE classe_matiere.id_matiere=matiere.id AND classe_matiere.id_classe=? AND matiere.id IN (SELECT question.id_matiere FROM question)');
         $classe_matiere->execute(array($id_classe));
         return $classe_matiere;
     }

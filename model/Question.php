@@ -21,6 +21,19 @@ class Question
         return $questions;
     }
 
+    public function readAllByType($email, $type)
+    {
+        if ($type > 2) {
+            $questions = $this->cnx->prepare('SELECT * FROM question');
+            $questions->execute(array());
+        }else{
+            $questions = $this->cnx->prepare('SELECT * FROM `question` WHERE question.id_matiere IN ( SELECT id_matiere FROM enseignant_matiere WHERE email_enseignant=? )');
+            $questions->execute(array($email));
+        }
+        
+        return $questions;
+    }
+
     //afficher une question précise
     public function readOne($id)
     {

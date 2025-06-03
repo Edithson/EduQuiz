@@ -21,69 +21,78 @@ outils = [0, 0, 0]
 
 vie = 3
 min = 0
-data = null;
-data1 = null
-data2=null
-data3=null
-data4=null
-data5=null
-data6=null
-data7=null
-data8=null
-data9=null
-data10=null
+data = [];
 
-for (let index = 1; index < 11; index++) {    
+function getIdMatFromUrl(url) {
+    const urlObj = new URL(url); // Crée un objet URL
+    const idMat = urlObj.searchParams.get('id_mat'); // Récupère la valeur du paramètre 'id_mat'
+    
+    if (idMat !== null) {
+        return idMat; // Retourne la valeur si elle existe
+    }
+    
+    return null; // Retourne null si le paramètre n'existe pas
+}
+
+var questions
+
+async function loadQuestions() {
+    const url = window.location.href;
+    const idMatValue = getIdMatFromUrl(url);
+    let id_matiere;
+
+    if (idMatValue !== null) {
+        id_matiere = idMatValue;
+    } else {
+        alert("Aucune question trouvée; retour a la page d'accueil");
+        window.location.href = '../index.php';
+        return;
+    }
+
     try {
-        cookie = decodeURIComponent(getCookie('questions'+index))
-        cookie = JSON.parse(cookie)
-        if (index==1) {
-            data1 = Object.values(cookie)
-        }if (index == 2 && data1 != null) {
-            data = data1
-            data2 = Object.values(cookie)
-        }if (index == 3 && data2 != null) {
-            data = data.concat(data2)
-            data3 = Object.values(cookie)
-        }if (index == 4 && data3 != null) {
-            data = data.concat(data3)
-            data4 = Object.values(cookie)
-        }if (index == 5 && data4 != null) {
-            data = data.concat(data4)
-            data5 = Object.values(cookie)
-        }if (index == 6 && data5 != null) {
-            data = data.concat(data5)
-            data6 = Object.values(cookie)
-        }if (index == 7 && data6 != null) {
-            data = data.concat(data6)
-            data7 = Object.values(cookie)
-        }if (index == 8 && data7 != null) {
-            data = data.concat(data7)
-            data8 = Object.values(cookie)
-        }if (index == 9 && data8 != null) {
-            data = data.concat(data8)
-            data9 = Object.values(cookie)
-        }if (index == 10 && data9 != null) {
-            data = data.concat(data9)
-            data10 = Object.values(cookie)
-        }if (data10 != null) {
-            data = data.concat(data10)
-        } else {
-            
-        }
+        const response = await fetch(`http://localhost/quiz5/index.php?path=getquestion&id_mat=${id_matiere}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
         
+        const rep = await response.json();
+        
+        if (rep.success) {
+            const questions = rep.question; // Pas besoin de JSON.stringify
+            
+            // Ici vous pouvez utiliser vos questions
+            return questions;
+        } else {
+            alert('Erreur lors de la récupération des questions');
+            console.log(rep.message);
+        }
     } catch (error) {
-        console.log ('cookie'+index+' pas trouvé')
+        alert("Une erreur est survenue lors de la récupération des questions...");
+        console.log(error);
     }
 }
 
-if (data == null) {
-    alert("Aucune question trouvée; retour a la page d'accueil")
-    window.location.href='../index.php'
-}
+// Appel de la fonction
+loadQuestions().then(questions => {
+    if (questions) {
+        data = questions;
+        console.log('data = ', data);
+        // Continuez votre logique ici
+    }
 
-console.log('nombre de question : ')
-console.log(data.length)
+
+console.log('nombre de question : '+data.length)
+if (data == null || data == undefined || data == [] || data == NaN) {
+    alert("Aucunes questions trouvées")
+    window.location.href = '../index.php';
+}
+if (data.length == 0) {
+    alert("Aucunes questions trouvées")
+    window.location.href = '../index.php';
+}
 max = data.length-1
 taille = 215
 voix4 = 0
@@ -93,6 +102,7 @@ questionsDejaPoser = []
 nbr = aleaUnique(min, max, questionsDejaPoser)
 score = 0
 utiliserOrdinateur = false
+let reponseUtilisateur
 
 function getCookie(name)
 {
@@ -133,7 +143,7 @@ function getCookie2(cookieName)
         setTimeout(() => {
             document.getElementById("drap").style.display = "none",
             afficherQuestions(data, nbr)
-        }, 28000);
+        }, 20000);
     })
     
     var x
@@ -143,6 +153,7 @@ function getCookie2(cookieName)
 
         document.getElementById("Q1").addEventListener("click", function(){
             let vie_interne = vie
+            reponseUtilisateur = 1
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
@@ -165,6 +176,7 @@ function getCookie2(cookieName)
         })
         document.getElementById("Q2").addEventListener("click", function(){
             let vie_interne = vie
+            reponseUtilisateur = 2
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
@@ -187,6 +199,7 @@ function getCookie2(cookieName)
         })
         document.getElementById("Q3").addEventListener("click", function(){
             let vie_interne = vie
+            reponseUtilisateur = 3
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
@@ -209,6 +222,7 @@ function getCookie2(cookieName)
         })
         document.getElementById("Q4").addEventListener("click", function(){
             let vie_interne = vie
+            reponseUtilisateur = 4
             document.getElementById("drap").style.display = "inline-block"
             speechSynthesis.cancel()
             x = continuer(data, nbr)
@@ -293,7 +307,7 @@ function comparaison(userAnswer, correctAnswer) {
     }
 }
 
-var reponseUtilisateur
+
 function userAnswer() {
     return (reponseUtilisateur)
 }
@@ -321,13 +335,13 @@ function continuer(data, nbr) {
                 showSpeak("vous auriez due choisir"+data[nbr].proposition_1)
                 indiceBonneReponse(1)
             }if(data[nbr].reponse == 2) {
-                showSpeak("vous auriez due choisir"+data[nbr].proposition_1)
+                showSpeak("vous auriez due choisir"+data[nbr].proposition_2)
                 indiceBonneReponse(2)
             }if(data[nbr].reponse == 3) {
-                showSpeak("vous auriez due choisir"+data[nbr].proposition_1)
+                showSpeak("vous auriez due choisir"+data[nbr].proposition_3)
                 indiceBonneReponse(3)
             }if(data[nbr].reponse == 4) {
-                showSpeak("vous auriez due choisir"+data[nbr].proposition_1)
+                showSpeak("vous auriez due choisir"+data[nbr].proposition_4)
                 indiceBonneReponse(4)
             }
             indicationMauvaiseReponse(userAnswer())
@@ -515,6 +529,9 @@ function public(data, nbr, utiliserOrdinateur){
     outils[2] +=1
 }
 
+
+});
+
 function aleaUnique(min, max, tab) {
     if (min <= max) {
         
@@ -565,4 +582,3 @@ function aleaUnique(min, max, tab) {
         return "erreur, max < min"
     }
 }
-

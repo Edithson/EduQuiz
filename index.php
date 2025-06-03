@@ -4,6 +4,7 @@ require_once('controller/accueil.php');
 require_once('controller/utilisateur.php');
 require_once('controller/Administration.php');
 require_once('controller/mailer.php');
+require_once('controller/question.php');
 
 // $_SESSION['type'] = 3;
 // $_SESSION['auth'] = true;
@@ -59,6 +60,8 @@ if (isset($_GET['path']) && !empty($_GET['path'])) {
         contact();
     }elseif ($_GET['path'] == 'contact/message') {
         contact_message($_POST);
+    }elseif ($_GET['path'] == 'getquestion') {
+        get_question();
     }else {
         accueil();
     }

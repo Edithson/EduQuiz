@@ -36,7 +36,7 @@ require_once('view/layout/nav_bar.php');
                 <form action="index.php?path=action" id="matiere" method="post">
                     
                 </form><br>
-                <button id="hide" onclick="stopQuiz()">Annuler</button>
+                <button id="hide" onclick="stopQuiz()">Annuler ❌</button>
             </section>
         </div>
     </div>
@@ -129,7 +129,7 @@ require_once('view/layout/nav_bar.php');
             x=0
         }
     })
-    document.getElementById('filiere').addEventListener('click', function(){
+    document.getElementById('filiere').addEventListener('change', function(){
         filiere = document.getElementById('filiere').value
         $('#classe').load('view/utilisateur/filiere.php?filiere='+filiere);
 

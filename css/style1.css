@@ -395,3 +395,9 @@ Personnalisation de la barre de défilement
     margin-right: 10px;
     color: #000000;
 }
+.subjects-grid2 h2{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: white;
+}

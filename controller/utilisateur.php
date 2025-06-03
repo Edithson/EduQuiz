@@ -160,7 +160,7 @@ function creation_validation($input){
     $code = htmlspecialchars($_POST['true_code']);
     if ($user_code == $code) {
         $user = new Utilisateur();
-        $create = $user->create($email, $nom, 0, $password);
+        $create = $user->create($email, $nom, 1, $password);
         if ($create == true) {
             $_SESSION['auth'] = true;
             $_SESSION['admin'] = 0;

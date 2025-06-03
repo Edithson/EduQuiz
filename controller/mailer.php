@@ -11,8 +11,8 @@ function send_mail($email_dest, $sujet, $msg){
 
     $mail = new PHPMailer(true);
 
-    $gmail = 'adressemail@gmail.com';
-    $mdp = 'votre cle appli google';
+    $gmail = 'eduquizplus@gmail.com';
+    $mdp = 'dsrh dtwf pkdb smmc';
     
     try {
         $mail->isSMTP();

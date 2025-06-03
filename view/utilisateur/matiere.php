@@ -13,7 +13,7 @@ if ($matieres->rowCount() > 0) {
         <input type="radio" name="matiere" value="<?=$une_matiere['id_matiere']?>"><?=$une_matiere['nom_mat']?><br>
         <?php
     }
-    echo "<br><input type='submit' name='valider' value='valider'>";
+    echo "<br><input type='submit' name='valider' value='Ajouter ✔'>";
 }else {
     echo "<p>Aucunes matières trouvées...</p>";
 }

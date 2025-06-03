@@ -26,12 +26,22 @@ class Enseignant_Matiere
     }
 
     //afficher toutes les matieres d'un enseignant
-    public static function read_mt($email_eng)
+    public static function read_mt($email_eng, $type=null)
     {
         $db = new Db();
         $cnx = $db->getCnx();
-        $result = $cnx->prepare('SELECT matiere.id AS id_matiere, matiere.nom AS nom_matiere, matiere.description FROM matiere, enseignant_matiere WHERE enseignant_matiere.id_matiere = matiere.id AND enseignant_matiere.email_enseignant=? ORDER BY matiere.nom');
-        $result->execute(array($email_eng));
+        if (is_null($type)) {
+            $result = $cnx->prepare('SELECT DISTINCT(matiere.nom), matiere.id AS id_matiere, matiere.nom AS nom_matiere, matiere.description FROM matiere, enseignant_matiere WHERE enseignant_matiere.id_matiere = matiere.id AND enseignant_matiere.email_enseignant=? ORDER BY matiere.nom');
+            $result->execute(array($email_eng));
+        }else {
+            if ($type > 2) {
+                $result = $cnx->prepare('SELECT DISTINCT(matiere.nom), matiere.id AS id_matiere, matiere.nom AS nom_matiere, matiere.description FROM matiere ORDER BY matiere.nom');
+                $result->execute(array());
+            }else{
+                $result = $cnx->prepare('SELECT DISTINCT(matiere.nom), matiere.id AS id_matiere, matiere.nom AS nom_matiere, matiere.description FROM matiere, enseignant_matiere WHERE enseignant_matiere.id_matiere = matiere.id AND enseignant_matiere.email_enseignant=? ORDER BY matiere.nom');
+                $result->execute(array($email_eng));
+            }
+        }
         return $result;
     }
 

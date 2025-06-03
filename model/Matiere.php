@@ -39,7 +39,7 @@ class Matiere
 
     public function readAll()
     {
-        $matiere = $this->cnx->prepare('SELECT * FROM matiere');
+        $matiere = $this->cnx->prepare('SELECT * FROM matiere ORDER BY id DESC');
         $matiere->execute();
         return $matiere;
     }

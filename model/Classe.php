@@ -42,7 +42,7 @@ class Classe
     //afficher toutes les classes d'une spécialité (filière)
     public function readAll_Classe_Sp($id_sp)
     {
-        $classe = $this->cnx->prepare('SELECT classe.id as id, id_cycle, id_specialite, classe.intitule FROM classe, filiere WHERE classe.id_specialite=filiere.id AND filiere.id=?');
+        $classe = $this->cnx->prepare('SELECT classe.id as id, id_cycle, id_specialite, classe.intitule FROM classe, filiere WHERE classe.id_specialite=?');
         $classe->execute(array($id_sp));
         return $classe;
     }

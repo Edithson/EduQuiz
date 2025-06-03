@@ -4,6 +4,7 @@ require_once('model/Utilisateur.php');
 require_once('model/Matiere.php');
 require_once('model/Classe.php');
 require_once('model/Filiere.php');
+require_once('model/Type.php');
 require_once('model/Cycle.php');
 require_once('model/Classe_Matiere.php');
 require_once('model/Enseignant_Matiere.php');
@@ -14,8 +15,9 @@ function create_eng($input)
         if (isset($input['email']) && isset($input['nom']) && !empty($input['email']) && !empty($input['nom'])) {
             $email = htmlspecialchars($input['email']);
             $nom = htmlspecialchars($input['nom']);
+            $type = htmlspecialchars($input['type']);
             $eng = new Utilisateur();
-            $create = $eng->create($email, $nom, 2);
+            $create = $eng->create($email, $nom, $type);
             if ($create == 1) {
                 $matiere = new Matiere();
                 $matieres = $matiere->readAll();
@@ -35,11 +37,12 @@ function create_eng($input)
         if (isset($input['email']) && isset($input['nom']) && !empty($input['email']) && !empty($input['nom'])) {
             $email = htmlspecialchars($input['email']);
             $nom = htmlspecialchars($input['nom']);
+            $type = htmlspecialchars($input['type']);
             $eng = new Utilisateur();
             $anc_eng = new Utilisateur();
             $Aemail = htmlspecialchars($input['Aemail']);
             $ancienne_info = $anc_eng->read($Aemail)->fetch();
-            $update = $eng->update($email, $nom, 2, $ancienne_info['email']);
+            $update = $eng->update($email, $nom, $type, $ancienne_info['email']);
             if ($update == 1) {
                 Enseignant_Matiere::deleteFromEng($email);
                 $matiere = new Matiere();
@@ -60,7 +63,9 @@ function create_eng($input)
     $matiere = new Matiere();
     $matieres = $matiere->readAll();
     $eng = new Utilisateur();
-    $enseignants = $eng->read_eng();
+    // $enseignants = $eng->read_eng();
+    $enseignants = $eng->readAll();
+    $types = Type::readAll();
     require_once('view/administration/nouveauEng.php');
 }
 
@@ -170,6 +175,7 @@ function classe($input)
     }
     $cycles = Cycle::readAll();
     $specialites = Filiere::readAll();
+    $specialites2 = Filiere::readAll();
     $matieres = $matiere->readAll();
     $classes = $classe->readAll();
     require_once('view/administration/classe.php');
@@ -201,14 +207,14 @@ function filiere($input)
 }
 
 function create_question(){
-    $matieres = Enseignant_Matiere::read_mt($_SESSION['email']);
+    $matieres = Enseignant_Matiere::read_mt($_SESSION['email'], $_SESSION['type']);
     require_once('view/administration/question/create.php');
 }
 
 function edit_question(){
     if (isset($_GET['id']) && !empty($_GET['id'])) {
 
-        $matieres = Enseignant_Matiere::read_mt($_SESSION['email']);
+        $matieres = Enseignant_Matiere::read_mt($_SESSION['email'], $_SESSION['type']);
         $id = htmlspecialchars($_GET['id']);
     
         $qt = new Question();
@@ -219,7 +225,7 @@ function edit_question(){
     
         require_once('view/administration/question/edit.php');
     }else{
-        $matieres = Enseignant_Matiere::read_mt($_SESSION['email']);
+        $matieres = Enseignant_Matiere::read_mt($_SESSION['email'], $_SESSION['type']);
         require_once('view/administration/question.php');
     }
 }
@@ -233,8 +239,8 @@ function delete_question(){
         $questions = $qt->delete($id);
     }
     $question = new Question();
-    $questions = $question->readAll();
-    $matieres = Enseignant_Matiere::read_mt($_SESSION['email']);
+    $questions = $question->readAllByType($_SESSION['email'], $_SESSION['type']);
+    $matieres = Enseignant_Matiere::read_mt($_SESSION['email'], $_SESSION['type']);
     require_once('view/administration/question.php');
 }
 
@@ -275,8 +281,7 @@ function question($input)
         }
     }
     $question = new Question();
-
-    $questions = $question->readAll();
-    $matieres = Enseignant_Matiere::read_mt($_SESSION['email']);
+    $questions = $question->readAllByType($_SESSION['email'], $_SESSION['type']);
+    $matieres = Enseignant_Matiere::read_mt($_SESSION['email'], $_SESSION['type']);
     require_once('view/administration/question.php');
 }
