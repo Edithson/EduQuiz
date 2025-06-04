@@ -71,6 +71,17 @@ class Classe_Matiere
         return $classe_matiere;
     }
 
+    //afficher toutes les matières et leurs classes respectives
+    /*Seulement les matières qui auront au moins une question*/
+    public static function read_matiere_classe()
+    {
+        $db = new Db();
+        $cnx = $db->getCnx();
+        $classe_matiere = $cnx->prepare('SELECT classe_matiere.*, matiere.nom AS nom FROM `classe_matiere`, matiere WHERE classe_matiere.id_matiere=matiere.id AND matiere.id IN (SELECT question.id_matiere FROM question)');
+        $classe_matiere->execute(array());
+        return $classe_matiere;
+    }
+
     //changer la classe d'une matiere
     /**
      * faire en sorte qu'une matiere sois

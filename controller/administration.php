@@ -26,12 +26,15 @@ function create_eng($input)
                         Enseignant_Matiere::create($email, $matiere['id']);
                     }
                 }
-                echo 'Création Réussie';
+                $msg = 'Création Réussie';
+                $msg_type = 'success';
             }else {
-                echo 'Utilisateur déja existant. Type d\'erreur : '.$create;
+                $msg = 'Utilisateur déja existant. Type d\'erreur : '.$create;
+                $msg_type = 'danger';
             }
         }else {
-            echo 'Veuillez remplir correctement tout les champs';
+            $msg = 'Veuillez remplir correctement tout les champs';
+            $msg_type = 'warning';
         }
     }elseif (isset($input['update'])) {
         if (isset($input['email']) && isset($input['nom']) && !empty($input['email']) && !empty($input['nom'])) {
@@ -52,12 +55,15 @@ function create_eng($input)
                         Enseignant_Matiere::create($email, $matiere['id']);
                     }
                 }
-                echo 'Mise à jour Réussie';
+                $msg = 'Mise à jour Réussie';
+                $msg_type = 'success';
             }else {
-                echo 'Utilisateur déja existant. Type d\'erreur : '.$update;
+                $msg = 'Utilisateur déja existant. Type d\'erreur : '.$update;
+                $msg_type = 'warning';
             }
         }else {
-            echo 'Veuillez remplir correctement tous les champs!';
+            $msg = 'Veuillez remplir correctement tous les champs!';
+            $msg_type = 'warning';
         }
     }
     $matiere = new Matiere();
@@ -92,8 +98,11 @@ function matiere($input)
                     Enseignant_Matiere::create($un_eng['email'], $id_mt['id']);
                 }
             }
+            $msg = 'Création réussie';
+            $msg_type = 'success';
         }else {
-            echo 'Veuillez remplir le champ nom';
+            $msg = 'Veuillez remplir le champ nom';
+            $msg_type = 'warning';
         }
     }elseif (isset($input['update'])) {
         if (isset($input['nom']) && !empty($input['nom'])) {
@@ -113,8 +122,11 @@ function matiere($input)
                     Enseignant_Matiere::create($un_eng['email'], $id);
                 }
             }
+            $msg = 'Mise à jour réussie';
+            $msg_type = 'success';
         }else {
-            echo 'Veuillez remplir le champ nom';
+            $msg = 'Veuillez remplir le champ nom';
+            $msg_type = 'warning';
         }
     }elseif (isset($input['delete'])) {
         $id = htmlspecialchars($input['id']);
@@ -127,6 +139,8 @@ function matiere($input)
         }
         $matiere = new Matiere();
         $matiere->delete($id);
+        $msg = 'Suppression terminée';
+        $msg_type = 'success';
     }
     $engs = $eng->read_eng();
     $matieres = $matiere->readAll();
@@ -151,9 +165,11 @@ function classe($input)
                     Classe_Matiere::create($id_cl['id'], $une_mt['id']);
                 }
             }
-
+            $msg = 'Création réussie';
+            $msg_type = 'success';
         }else {
-            echo 'Veuillez remplir tous les champs';
+            $msg = 'Veuillez remplir tous les champs';
+            $msg_type = 'warning';
         }
     }elseif (isset($input['update'])) {
         if (isset($input['intitule']) && !empty($input['intitule'])) {
@@ -168,9 +184,11 @@ function classe($input)
                     Classe_Matiere::create($id, $une_mt['id']);
                 }
             }
-
+            $msg = 'Mise à jour réussie';
+            $msg_type = 'success';
         }else {
-            echo 'Veuillez remplir tous les champs';
+            $msg = 'Veuillez remplir tous les champs';
+            $msg_type = 'warning';
         }
     }
     $cycles = Cycle::readAll();
@@ -189,8 +207,11 @@ function filiere($input)
             $nom = htmlspecialchars($input['sp']);
             $desc = htmlspecialchars($input['desc']);
             $filiere->create($nom, $desc);
+            $msg = 'Création réussie';
+            $msg_type = 'success';
         }else {
-            echo 'Veuillez remplir tous les champs';
+            $msg = 'Veuillez remplir tous les champs';
+            $msg_type = 'warning';
         }
     }elseif (isset($input['update'])) {
         if (isset($input['sp']) && !empty($input['sp'])) {
@@ -198,8 +219,11 @@ function filiere($input)
             $desc = htmlspecialchars($input['desc']);
             $id = htmlspecialchars($input['id']);
             $filiere->update($id, $nom, $desc);
+            $msg = 'Mise à jour réussie';
+            $msg_type = 'success';
         }else {
-            echo 'Veuillez remplir tous les champs';
+            $msg = 'Veuillez remplir tous les champs';
+            $msg_type = 'warning';
         }
     }
     $specialites = Filiere::readAll();
@@ -237,6 +261,8 @@ function delete_question(){
         $qt = new Question();
     
         $questions = $qt->delete($id);
+        $msg = 'Suppression terminée';
+        $msg_type = 'success';
     }
     $question = new Question();
     $questions = $question->readAllByType($_SESSION['email'], $_SESSION['type']);
@@ -259,25 +285,29 @@ function question($input)
             $qt = new Question();
             $qt->create($ma_matiere, $intitule, $p1, $p2, $p3, $p4, $rep);
             $msg = "enregistrement ok";
+            $msg_type = 'success';
         }else {
             $msg = "veuillez remplir tout les champs";
+            $msg_type = 'warning';
         }
         
     }elseif (isset($_POST['update'])) {
         if (isset($_POST['int']) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['p3']) && isset($_POST['p4']) && isset($_POST['rep']) && !empty($_POST['int']) && !empty($_POST['p1']) && !empty($_POST['p2']) && !empty($_POST['p3']) && !empty($_POST['p4']) && !empty($_POST['rep'])) {
             $id = htmlspecialchars($_POST['id']);
             $ma_matiere = htmlspecialchars($_POST['matiere']);
-            $intitule = htmlspecialchars($_POST['int']);
+            $intitule = ($_POST['int']);
             $p1 = htmlspecialchars($_POST['p1']);
             $p2 = htmlspecialchars($_POST['p2']);
             $p3 = htmlspecialchars($_POST['p3']);
-            $p4 = htmlspecialchars($_POST['p4']);
+            $p4 = ($_POST['p4']);
             $rep = htmlspecialchars($_POST['rep']);
             $qt = new Question();
             $qt->update($id, $ma_matiere, $intitule, $p1, $p2, $p3, $p4, $rep);
             $msg = "mise à jour ok";
+            $msg_type = 'success';
         }else {
             $msg = "veuillez remplir tout les champs";
+            $msg_type = 'warning';
         }
     }
     $question = new Question();

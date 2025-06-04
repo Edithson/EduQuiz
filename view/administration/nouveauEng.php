@@ -12,12 +12,19 @@
 
     <div class="container">
         <div class="page-header">
-            <h1 class="page-title">📚 Gestion des Utilisateur</h1>
+            <h1 class="page-title">👤 Gestion des Utilisateur</h1>
             <p class="page-subtitle">
                 Organisez et gérez tout le corps enseignant et les joueurs de votre plateforme d'apprentissage. 🎯
             </p>
         </div>
-
+        <?php
+            if (isset($msg) && isset($msg_type)) {?>
+                <div class="alert alert-<?=$msg_type?> alert-dismissible fade show" role="alert">
+                    <strong><?=$msg?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div><?php
+            }
+            ?>
         <div class="action-bar">
             <div class="search-container">
                 <input type="text" class="search-input filter-input" placeholder="🔍 Rechercher un enseignant..." 

@@ -325,9 +325,12 @@ require_once('view/layout/nav_bar.php');
             </p>
         </div>
 
-            <?php
-            if (isset($msg)) {
-                echo $msg;
+        <?php
+            if (isset($msg) && isset($msg_type)) {?>
+                <div class="alert alert-<?=$msg_type?> alert-dismissible fade show" role="alert">
+                    <strong><?=$msg?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div><?php
             }
             ?>
         <div class="contact-grid">

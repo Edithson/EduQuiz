@@ -18,7 +18,14 @@ require_once('view/layout/nav_bar.php');
                 Créez, modifiez et suivez les performances de chaque discipline ! 🎯
             </p>
         </div>
-
+        <?php
+            if (isset($msg) && isset($msg_type)) {?>
+                <div class="alert alert-<?=$msg_type?> alert-dismissible fade show" role="alert">
+                    <strong><?=$msg?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div><?php
+            }
+            ?>
         <div class="action-bar">
             <div class="search-container">
                 <input type="text" class="search-input filter-input" placeholder="🔍 Rechercher une matière..." 

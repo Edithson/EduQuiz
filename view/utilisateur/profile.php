@@ -21,8 +21,11 @@ require_once('view/layout/nav_bar.php');
         <section class="user_box_profil">
             <br>
             <?php
-            if (isset($msg)) {
-                echo $msg.'<br>';
+            if (isset($msg) && isset($msg_type)) {?>
+                <div class="alert alert-<?=$msg_type?> alert-dismissible fade show" role="alert">
+                    <strong><?=$msg?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div><?php
             }
             ?>
             <div>

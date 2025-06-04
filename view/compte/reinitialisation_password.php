@@ -16,8 +16,11 @@ require_once('view/layout/nav_bar.php');
         <section class="user_box">
             <h2>Opétation de réinitialisation de mot de passe</h2><br>
             <?php
-            if (isset($msg)) {
-                echo $msg;
+            if (isset($msg) && isset($msg_type)) {?>
+                <div class="alert alert-<?=$msg_type?> alert-dismissible fade show" role="alert">
+                    <strong><?=$msg?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div><?php
             }
             ?>
             <form action="index.php?path=user/reinitialisation/password/store" method="post">

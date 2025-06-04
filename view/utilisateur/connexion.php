@@ -12,14 +12,17 @@ require_once('view/layout/nav_bar.php');
     </div>
 
     <div class="container">
-
         <section class="user_box">
             <h2>Connectez vous afin d'accéder à l'interface d'administration</h2><br>
             <?php
-            if (isset($msg)) {
-                echo $msg;
+            if (isset($msg) && isset($msg_type)) {?>
+                <div class="alert alert-<?=$msg_type?> alert-dismissible fade show" role="alert">
+                    <strong><?=$msg?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div><?php
             }
             ?>
+
             <form action="index.php?path=connexion" method="post">
                 <label for="">Email : </label><br>
                 <input type="text" name="email" class="filter-input" required><br><br>

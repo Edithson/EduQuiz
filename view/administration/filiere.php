@@ -12,12 +12,19 @@ require_once('view/layout/nav_bar.php');
 
     <div class="container">
         <div class="page-header">
-            <h1 class="page-title">📚 Gestion des Filières</h1>
+            <h1 class="page-title">🗃️ Gestion des Filières</h1>
             <p class="page-subtitle">
                 Organisez et gérez toutes les filières de votre plateforme d'apprentissage. 🎯
             </p>
         </div>
-
+        <?php
+            if (isset($msg) && isset($msg_type)) {?>
+                <div class="alert alert-<?=$msg_type?> alert-dismissible fade show" role="alert">
+                    <strong><?=$msg?></strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div><?php
+            }
+            ?>
         <div class="action-bar">
             <div class="search-container">
                 <input type="text" class="search-input filter-input" placeholder="🔍 Rechercher une filière..." 
@@ -56,7 +63,7 @@ require_once('view/layout/nav_bar.php');
                         >
                         <div class="subject-header" style="height: 200px;">
                             <div>
-                                <div class="subject-icon">📖</div>
+                                <div class="subject-icon">🗃️</div>
                                 <h3 class="subject-title matiere" value="<?=$filiere['id']?>"><?=substr($filiere['nom'], 0, 30)?></h3>
                             </div>
                             <div class="subject-actions">
@@ -104,7 +111,7 @@ function initializeTeacherSearch() {
     noResultsMessage.className = 'no-results-message';
     noResultsMessage.innerHTML = `
         <div style="text-align: center; padding: 40px; color: #666;">
-            <div style="font-size: 48px; margin-bottom: 16px;">👨‍🏫</div>
+            <div style="font-size: 48px; margin-bottom: 16px;">🗃️</div>
             <h3 style="margin: 0 0 8px 0;">Aucune filière trouvée</h3>
             <p style="margin: 0;">Essayez de modifier vos critères de recherche</p>
         </div>

@@ -26,10 +26,12 @@ function connexion($input)
                 }
                 header('Location: index.php');
             }else {
-                echo 'Echec de connexion! Information invalide';
+                $msg = 'Echec de connexion! Information invalide';
+                $msg_type = 'danger';
             }
         }else {
-            echo 'Veuillez remplir correctement tous les champs!';
+            $msg = 'Veuillez remplir correctement tous les champs!';
+            $msg_type = 'warning';
         }
     }
     require_once('view/utilisateur/connexion.php');
@@ -46,6 +48,7 @@ function profile($input)
                 $info_user = $user->read($email);
                 if ($info_user->rowCount() > 0) {
                     $msg = 'Cet email est déjà utiliser par un autre!';
+                    $msg_type = 'warning';
                 }else{
                     $update = $user->update($email, $nom, $_SESSION['type'], $_SESSION['email']);
                 }
@@ -59,12 +62,15 @@ function profile($input)
                 $_SESSION['email'] = $mes_info['email'];
                 $_SESSION['nom'] = $mes_info['nom'];
                 $msg = 'Les informations ont bien été mises à jour!';
+                $msg_type = 'success';
             }else {
                 $msg = 'Une erreur s’est produite !'.$update;
+                $msg_type = 'danger';
             }
             
         }else {
             $msg = 'Veuillez remplir tous les champs!';
+            $msg_type = 'warning';
         }
     }elseif (isset($input['update2'])) {
         if (isset($input['password1']) && isset($input['password2']) && isset($input['password3']) && !empty($input['password1']) && !empty($input['password2']) && !empty($input['password3'])) {
@@ -76,14 +82,18 @@ function profile($input)
                 if ($password2 == $password3) {
                     $user->update_password($_SESSION['email'], $password2);
                     $msg = 'Le mot de passe à bien été mis à jour!';
+                    $msg_type = 'success';
                 }else {
                     $msg = 'Le nouveau mot de passe et sa confirmation ne correspondent pas!';
+                    $msg_type = 'warning';
                 }
             }else {
                 $msg = 'Ancien mot de passe incorrect!';
+                $msg_type = 'warning';
             }
         }else {
             $msg = 'Veuillez remplir tous les champs!';
+            $msg_type = 'warning';
         }
     }
     require_once('view/utilisateur/profile.php');
@@ -110,6 +120,7 @@ function contact_message(){
     ";
     send_mail("eduquizplus@gmail.com", "FeedBack utilisateur", $mail_msg);
     $msg = '🎉 Merci pour votre message ! Nous vous répondrons très bientôt. 😊';
+    $msg_type = 'success';
     require_once('view/nous/contact.php');
 }
 
@@ -134,22 +145,24 @@ function store_creation($input){
             $verify = $user->read($email);
             if ($verify->rowCount() == 0) {
                 $code = generateRandomHex();
-                $msg = "<p>Votre code de validation est le <b>".$code."</b></p>";
-                send_mail($email, "Validation d'adresse mail", $msg);
+                $email_msg = "<p>Votre code de validation est le <b>".$code."</b></p>";
+                send_mail($email, "Validation d'adresse mail", $email_msg);
                 require_once('view/compte/validation.php');
             }else {
                 $msg = 'Cette adresse email est déjà utiliser par un autre!';
+                $msg_type = 'warning';
                 require_once('view/compte/creation.php');
             }
         }else {
             $msg = 'Mot de passe et confirmation incorrect!';
+            $msg_type = 'danger';
             require_once('view/compte/creation.php');
         }
     }else{
         $msg = 'Veuillez remplir tous les champs!';
+        $msg_type = 'warning';
         require_once('view/compte/creation.php');
     }
-    echo("mamamiya");
 }
 
 function creation_validation($input){
@@ -167,14 +180,16 @@ function creation_validation($input){
             $_SESSION['super_admin'] = 0;
             $_SESSION['email'] = $email;
             $_SESSION['nom'] = $nom;
-            $_SESSION['type'] = 0;
+            $_SESSION['type'] = 1;
             header('Location: index.php');
         }else {
             $msg = 'Une erreur est survenue lors de la création de votre compte'.$create;
+            $msg_type = 'danger';
             require_once('view/compte/creation.php');
         }
     }else {
         $msg = 'Code incorrect!';
+        $msg_type = 'warning';
         require_once('view/compte/validation.php');
     }
 }
@@ -187,11 +202,12 @@ function store_reinitialisation($input){
     if (isset($_POST['email']) && !empty($_POST['email'])) {
         $email = htmlspecialchars($_POST['email']);
         $code = generateRandomHex();
-        $msg = "<p>Votre code de vérification est le <b>".$code."</b></p>";
-        send_mail($email, "Réinitialisation de mot de passe", $msg);
+        $email_msg = "<p>Votre code de vérification est le <b>".$code."</b></p>";
+        send_mail($email, "Réinitialisation de mot de passe", $email_msg);
         require_once('view/compte/validation_code_pass.php');
     }else{
         $msg = 'Veuillez entrez votre adresse mail!';
+        $msg_type = 'warning';
         require_once('view/compte/reinitialisation.php');
     }
 }
@@ -204,6 +220,7 @@ function reinitialisation_validation($input){
         require_once('view/compte/reinitialisation_password.php');
     }else {
         $msg = 'Code incorrect!';
+        $msg_type = 'warning';
         require_once('view/compte/validation_code_pass.php');
     }
 }
@@ -218,13 +235,16 @@ function store_reinitialisation_validation($input){
             $user->update_password($email, $password2);
             session_destroy();
             $msg = 'Le mot de passe à bien été mis à jour!';
+            $msg_type = 'success';
             require_once('view/utilisateur/connexion.php');
         }else{
             $msg = 'Le nouveau mot de passe et sa confirmation ne correspondent pas!';
+            $msg_type = 'warning';
             require_once('view/compte/reinitialisation_password.php');
         }
     }else{
         $msg = 'Veuillez remplir tous les champs!';
+        $msg_type = 'warning';
         require_once('view/compte/reinitialisation_password.php');
     }
 }

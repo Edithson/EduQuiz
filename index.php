@@ -20,6 +20,8 @@ if (isset($_GET['path']) && !empty($_GET['path'])) {
         show_question($_POST);
     }elseif ($_GET['path'] == 'connexion') {
         connexion($_POST);
+    }elseif ($_GET['path'] == 'startgame') {
+        start_game();
     }elseif ($_GET['path'] == 'deconnexion') {
         deconnexion();
     }elseif ($_GET['path'] == 'enseignant' && isset($_SESSION['type']) && $_SESSION['type'] > 2) {
