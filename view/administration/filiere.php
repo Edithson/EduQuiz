@@ -43,8 +43,8 @@ require_once('view/layout/nav_bar.php');
                 <label for="">Description de la Spécialité : </label><br>
                 <textarea name="desc" id="" cols="20" rows="3" placeholder="facultative" class="filter-input"></textarea><br><br>
                 <input type="submit" value="Valider" name="valider">
-                <button id="hide">Annuler</button>
             </form>
+            <button id="hide">Annuler</button>
             </div>
 
 

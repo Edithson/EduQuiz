@@ -2,8 +2,8 @@
 repliqueAppelPublic = ["Votre salle de classe a fini de voter", "vous avez choisi le vote de la salle de classe, n'oubliez pas que, le dernier mot vous revient", "voici le resultat du vote de la salle de classe"]
 repliqueDuCinquante = ["vous utiliser votre cinquante cinquante, pas de probleme", "l'ordinateur s'est charger d'éliminer deux mauvaise réponses", "vous avez activer votre cinquante cinquante"]
 repliqueoutils = ["vous ne pouvez pas utiliser cet avantage plus d'une fois","cet outils a deja été utiliser","cet option n'est plus disponible pour vous", "vous ne pouvez plus utiliser cet outils"]
-RbonneReponse = ["bonne reponse"]
-dialogue1 = ["bonjour Monsieur bob", "allo, Monsieur teddy?", "bonjour Monsieur frède"]
+RbonneReponse = ["excellente reponse", "bonne reponse", "bravo!", "parfait!"]
+dialogue1 = ["bonjour Monsieur Kamwa", "allo, Monsieur Djona?", "bonjour Monsieur Tejiogni"]
 dialogue2 = ["bonjour a vous", "merci bonjour", "oui bonjour", "bonjour,"]
 dialogue3 = ["pouriez vous aider votre jeune élève sur cette question,", "pour obtenir la reponse a cette question, votre jeune élève a fait appel a vous", "votre jeune élève souhaite votre avis sur cette question", "votre jeune élève a besoin de vous sur cette question"]
 dialogue4A = ["je suis sur que c'est ", "je sais, il faut choisir ", "je connais bien la réponse, c'est ", "je crois que la reponse c'est "]
@@ -95,8 +95,8 @@ if (data.length == 0) {
 }
 max = data.length-1
 taille = 215
-voix4 = 0
-voix5 = 5
+voix4 = 1
+voix5 = 2
 syntheseVocale = true
 questionsDejaPoser = []
 nbr = aleaUnique(min, max, questionsDejaPoser)
@@ -322,8 +322,10 @@ function continuer(data, nbr) {
         console.log(taille)
         document.getElementById("barre").style.height = taille+"px"
         parler(RbonneReponse[(Math.floor(Math.random()*((RbonneReponse.length-1)-0+1))+0)], voix5)
-        const music1=new Audio('medias/son/applaudissement.mp3');
-        music1.play();
+        if (syntheseVocale) {
+            const music1=new Audio('medias/son/applaudissement.mp3');
+            music1.play();
+        }
         score += 1
         document.getElementById("montantActuel").innerHTML = score
         return true
@@ -378,7 +380,7 @@ speechSynthesis.onvoiceschanged=function(){
                 voice= window.speechSynthesis.getVoices();
             }
             let parle= new SpeechSynthesisUtterance(texte);
-            let indexvoie=5;
+            let indexvoie=voix5;
             parle.voice=voice[indexvoie];
             speechSynthesis.speak(parle);  
         }
@@ -427,11 +429,13 @@ function vousAvezPerdu(params) {
 }
 
 function coupDeFille(data, nbr, outils) {
-    parler("nous allons passé ce coup de fille a un de vos professeurs", voix5)
+    parler("nous allons passé ce coup de fill à un de vos professeurs", voix5)
     setTimeout(() => {
-        const music1=new Audio('medias/son/tel.mp3');
-        music1.play();
-    }, 3000);
+        if (syntheseVocale) {
+            const music1=new Audio('medias/son/tel.mp3');
+            music1.play();
+        }
+    }, 2500);
 
     setTimeout(() => {
         parler(dialogue1[(Math.floor(Math.random()*((dialogue1.length-1)-0+1))+0)], voix5)
@@ -464,8 +468,8 @@ function coupDeFille(data, nbr, outils) {
             parler(dialogue4A[(Math.floor(Math.random()*((dialogue4A.length-1)-0+1))+0)]+tabx[0], voix4)
             document.getElementById("Q"+tab2[0]).style.background = "linear-gradient(45deg,rgb(155, 252, 163),rgb(103, 243, 98))"
             parler(dialogue5[(Math.floor(Math.random()*((dialogue5.length-1)-1+0))+0)], voix5)
-        }, 12000);
-    }, 8000);
+        }, 13000);
+    }, 9000);
 
         document.getElementById("bordure1").style.backgroundColor = "red"
         outils[0] += 1

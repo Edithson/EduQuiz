@@ -52,7 +52,8 @@ $enseignant = $enseignant->fetch();
 
 <script>
     document.getElementById('hide').addEventListener('click', function(e){
-        window.location.reload();
+        var path = 'index.php?path=enseignant';
+        window.location.href = path;
     })
 
     document.getElementById('type').addEventListener('change', function(){

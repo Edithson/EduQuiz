@@ -15,10 +15,10 @@ $filieres = $filieres->fetch();
     <label for="">Description de la Spécialité : </label><br>
     <textarea name="desc" id="" cols="20" rows="3" placeholder="facultative" class="filter-input"><?= $filieres['description'] ?></textarea><br><br>
     <input type="submit" value="Mettre à jour" name="update">
-    <button id="hide">Annuler</button>
     <script>
         document.getElementById('hide').addEventListener('click', function(e){
-            window.location.reload();
+            var path = 'index.php?path=filiere';
+            window.location.href = path;
         })
     </script>
     <?php

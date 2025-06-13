@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 04 juin 2025 à 12:48
+-- Généré le : mer. 04 juin 2025 à 15:22
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `classe` (
   PRIMARY KEY (`id`),
   KEY `fk_classe_cycle` (`id_cycle`),
   KEY `fk_classe_filiere` (`id_specialite`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `classe`
@@ -125,14 +125,15 @@ INSERT INTO `enseignant_matiere` (`email_enseignant`, `id_matiere`) VALUES
 ('admin@mail.com', 2),
 ('admin@mail.com', 3),
 ('admin@mail.com', 4),
-('admin@mail.com', 5),
+('admin@mail.com', 6),
 ('wabo@gmail.com', 2),
 ('fowa@gmail.com', 2),
 ('fowa@gmail.com', 3),
 ('fowa@gmail.com', 4),
 ('talla@gmail.com', 5),
 ('talla@gmail.com', 2),
-('talla@gmail.com', 1);
+('talla@gmail.com', 1),
+('admin@mail.com', 7);
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `filiere` (
   `nom` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `filiere`
@@ -169,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `matiere` (
   `nom` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `matiere`
@@ -200,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `reponse` smallint NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_question_matiere` (`id_matiere`)
-) ENGINE=MyISAM AUTO_INCREMENT=232 DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM AUTO_INCREMENT=355 DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `question`
@@ -337,107 +338,68 @@ INSERT INTO `question` (`id`, `id_matiere`, `intitule`, `proposition_1`, `propos
 (128, 2, 'Quel format audio est développé par Apple ?', 'MP3', 'AAC', 'ALAC', 'OGG', 3),
 (129, 2, 'Dans la vidéo, qu\'est-ce que le débit binaire (bitrate) ?', 'Le nombre d\'images par seconde', 'La quantité de données par seconde', 'La résolution de l\'image', 'La durée de la vidéo', 2),
 (130, 2, 'Quel est l\'avantage principal du format TIFF ?', 'Compression avec perte', 'Support de multiples pages', 'Petite taille de fichier', 'Format web optimisé', 2),
-(131, 4, 'Que signifie l\'acronyme SQL ?', 'Structured Query Language', 'Standard Query Language', 'Simple Query Language', 'System Query Language', 1),
-(132, 4, 'Quel est le rôle principal d\'un SGBD ?', 'Gérer et organiser les données', 'Créer des interfaces utilisateur', 'Développer des applications web', 'Optimiser les performances réseau', 1),
-(133, 4, 'Quelle commande SQL permet de créer une nouvelle table ?', 'CREATE TABLE', 'NEW TABLE', 'MAKE TABLE', 'BUILD TABLE', 1),
-(134, 4, 'Qu\'est-ce qu\'une clé primaire ?', 'Un identifiant unique pour chaque enregistrement', 'Un mot de passe pour accéder à la base', 'Une clé de chiffrement des données', 'Un index pour optimiser les requêtes', 1),
-(135, 4, 'Quelle commande permet d\'insérer des données dans une table ?', 'INSERT INTO', 'ADD DATA', 'PUT INTO', 'APPEND TO', 1),
-(136, 4, 'Que signifie ACID en base de données ?', 'Atomicité, Cohérence, Isolation, Durabilité', 'Access, Control, Index, Data', 'Automatic, Consistent, Integrated, Dynamic', 'Advanced, Complete, Indexed, Distributed', 1),
-(137, 4, 'Quelle clause SQL permet de filtrer les résultats ?', 'WHERE', 'FILTER', 'SELECT', 'HAVING', 1),
-(138, 4, 'Qu\'est-ce qu\'une clé étrangère ?', 'Une référence vers la clé primaire d\'une autre table', 'Une clé de sauvegarde de la table', 'Une clé publique de chiffrement', 'Une clé temporaire pour les transactions', 1),
-(139, 4, 'Quelle commande permet de modifier la structure d\'une table ?', 'ALTER TABLE', 'MODIFY TABLE', 'CHANGE TABLE', 'UPDATE TABLE', 1),
-(140, 4, 'Que fait la commande DELETE en SQL ?', 'Supprime des enregistrements d\'une table', 'Supprime une table complète', 'Supprime une base de données', 'Supprime un utilisateur', 1),
-(141, 4, 'Quel type de jointure retourne tous les enregistrements des deux tables ?', 'FULL OUTER JOIN', 'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 1),
-(142, 4, 'Qu\'est-ce que la normalisation en base de données ?', 'Organiser les données pour éviter la redondance', 'Chiffrer les données sensibles', 'Optimiser les performances', 'Créer des sauvegardes automatiques', 1),
-(143, 4, 'Quelle fonction SQL permet de compter le nombre d\'enregistrements ?', 'COUNT()', 'NUMBER()', 'TOTAL()', 'SUM()', 1),
-(144, 4, 'Que signifie NULL en SQL ?', 'Une valeur manquante ou inconnue', 'Une valeur égale à zéro', 'Une chaîne vide', 'Une valeur par défaut', 1),
-(145, 4, 'Quelle commande permet de trier les résultats d\'une requête ?', 'ORDER BY', 'SORT BY', 'ARRANGE BY', 'GROUP BY', 1),
-(146, 4, 'Qu\'est-ce qu\'un index en base de données ?', 'Une structure pour accélérer les recherches', 'Une copie de sauvegarde', 'Un type de données spécial', 'Un utilisateur administrateur', 1),
-(147, 4, 'Quelle est la première forme normale (1NF) ?', 'Éliminer les groupes répétitifs', 'Éliminer les dépendances partielles', 'Éliminer les dépendances transitives', 'Éliminer les dépendances multivaluées', 1),
-(148, 4, 'Que fait la clause GROUP BY ?', 'Regroupe les enregistrements par valeur', 'Trie les enregistrements', 'Filtre les enregistrements', 'Joint deux tables', 1),
-(149, 4, 'Quel type de données SQL stocke du texte de longueur variable ?', 'VARCHAR', 'CHAR', 'TEXT', 'STRING', 1),
-(150, 4, 'Qu\'est-ce qu\'une transaction en base de données ?', 'Une séquence d\'opérations traitées comme une unité', 'Une requête de sélection complexe', 'Un type de jointure avancée', 'Une procédure stockée', 1),
-(151, 4, 'Quelle commande crée un utilisateur en SQL ?', 'CREATE USER', 'ADD USER', 'NEW USER', 'MAKE USER', 1),
-(152, 4, 'Que signifie le terme \'cardinalité\' en base de données ?', 'Le nombre de tuples dans une relation', 'La taille d\'un champ', 'Le type d\'une donnée', 'La vitesse d\'exécution', 1),
-(153, 4, 'Quelle fonction SQL calcule la moyenne ?', 'AVG()', 'MEAN()', 'AVERAGE()', 'MEDIAN()', 1),
-(154, 4, 'Qu\'est-ce qu\'une vue (VIEW) en SQL ?', 'Une table virtuelle basée sur une requête', 'Une copie physique d\'une table', 'Un type d\'index spécialisé', 'Une sauvegarde automatique', 1),
-(155, 4, 'Quelle contrainte assure l\'unicité d\'une valeur ?', 'UNIQUE', 'DISTINCT', 'SINGLE', 'EXCLUSIVE', 1),
-(156, 4, 'Que fait la commande TRUNCATE ?', 'Vide une table en conservant sa structure', 'Supprime complètement une table', 'Modifie la structure d\'une table', 'Crée une copie d\'une table', 1),
-(157, 4, 'Qu\'est-ce qu\'un trigger en base de données ?', 'Une procédure qui s\'exécute automatiquement', 'Un type de requête complexe', 'Un utilisateur spécialisé', 'Une contrainte de sécurité', 1),
-(158, 4, 'Quelle jointure retourne uniquement les enregistrements correspondants ?', 'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN', 'FULL JOIN', 1),
-(159, 4, 'Que signifie CRUD en développement d\'applications ?', 'Create, Read, Update, Delete', 'Control, Read, Update, Display', 'Create, Retrieve, Upload, Delete', 'Copy, Read, Update, Distribute', 1),
-(160, 4, 'Quel est le rôle d\'un DBA ?', 'Administrer la base de données', 'Développer des applications', 'Tester les logiciels', 'Former les utilisateurs', 1),
-(161, 4, 'Qu\'est-ce que la dénormalisation ?', 'Introduire volontairement de la redondance', 'Supprimer toutes les redondances', 'Chiffrer les données', 'Compresser la base de données', 1),
-(162, 4, 'Quelle commande permet de créer une sauvegarde ?', 'BACKUP DATABASE', 'SAVE DATABASE', 'COPY DATABASE', 'EXPORT DATABASE', 1),
-(163, 4, 'Qu\'est-ce qu\'un schéma de base de données ?', 'La structure logique de la base', 'Le contenu des données', 'La taille du stockage', 'La vitesse d\'accès', 1),
-(164, 4, 'Quelle fonction SQL retourne la date actuelle ?', 'NOW()', 'TODAY()', 'CURRENT()', 'DATE()', 1),
-(165, 4, 'Que fait la clause HAVING ?', 'Filtre les groupes après GROUP BY', 'Trie les résultats', 'Joint deux tables', 'Crée un index', 1),
-(166, 4, 'Qu\'est-ce qu\'une relation Many-to-Many ?', 'Plusieurs enregistrements liés à plusieurs autres', 'Un enregistrement lié à plusieurs autres', 'Plusieurs enregistrements liés à un seul', 'Aucune relation entre enregistrements', 1),
-(167, 4, 'Quel opérateur SQL teste l\'appartenance à un ensemble ?', 'IN', 'BETWEEN', 'LIKE', 'EXISTS', 1),
-(168, 4, 'Qu\'est-ce que l\'intégrité référentielle ?', 'Cohérence entre tables liées', 'Unicité des clés primaires', 'Chiffrement des données', 'Optimisation des requêtes', 1),
-(169, 4, 'Quelle commande affiche la structure d\'une table ?', 'DESCRIBE', 'SHOW', 'DISPLAY', 'INFO', 1),
-(170, 4, 'Qu\'est-ce qu\'un deadlock ?', 'Blocage mutuel entre transactions', 'Erreur de syntaxe SQL', 'Corruption de données', 'Panne de serveur', 1),
-(171, 4, 'Quel niveau d\'isolation évite les lectures sales ?', 'READ COMMITTED', 'READ UNCOMMITTED', 'REPEATABLE READ', 'SERIALIZABLE', 1),
-(172, 4, 'Qu\'est-ce qu\'une procédure stockée ?', 'Code SQL précompilé et stocké', 'Une requête sauvegardée', 'Un type de trigger', 'Une contrainte complexe', 1),
-(173, 4, 'Quelle commande SQL permet la mise à jour conditionnelle ?', 'UPDATE avec WHERE', 'MODIFY avec IF', 'CHANGE avec WHEN', 'ALTER avec CASE', 1),
-(174, 4, 'Qu\'est-ce que le sharding ?', 'Partitionnement horizontal des données', 'Chiffrement des données', 'Compression des tables', 'Réplication des serveurs', 1),
-(175, 4, 'Quel type de données stocke des valeurs vraies/fausses ?', 'BOOLEAN', 'BIT', 'FLAG', 'SWITCH', 1),
-(176, 4, 'Qu\'est-ce qu\'un cluster en base de données ?', 'Groupe de serveurs travaillant ensemble', 'Type d\'index spécialisé', 'Ensemble de tables liées', 'Procédure de sauvegarde', 1),
-(177, 4, 'Quelle commande SQL supprime une table ?', 'DROP TABLE', 'DELETE TABLE', 'REMOVE TABLE', 'DESTROY TABLE', 1),
-(178, 4, 'Qu\'est-ce que la réplication ?', 'Copie des données sur plusieurs serveurs', 'Compression des données', 'Chiffrement automatique', 'Optimisation des requêtes', 1),
-(179, 4, 'Quel opérateur permet la recherche de motifs ?', 'LIKE', 'MATCH', 'FIND', 'SEARCH', 1),
-(180, 4, 'Qu\'est-ce que l\'OLTP ?', 'Online Transaction Processing', 'Online Table Processing', 'Optimized Load Transfer Protocol', 'Object Level Transaction Processing', 1),
-(181, 5, 'Qu\'est-ce que le besoin en fonds de roulement (BFR) ?', 'Besoin de financement du cycle d\'exploitation', 'Besoin de financement des investissements', 'Besoin de financement des dividendes', 'Besoin de financement des emprunts', 1),
-(182, 5, 'Que représente le ratio de liquidité générale ?', 'Actif circulant / Dettes à court terme', 'Disponibilités / Dettes à court terme', 'Capitaux propres / Total bilan', 'Chiffre d\'affaires / Actif total', 1),
-(183, 5, 'Quelle est la formule du délai de rotation des stocks ?', 'Stock moyen / Coût d\'achat × 360', 'Stock moyen / Chiffre d\'affaires × 360', 'Stock final / Coût d\'achat × 360', 'Stock initial / Chiffre d\'affaires × 360', 1),
-(184, 5, 'Qu\'est-ce que la capacité d\'autofinancement (CAF) ?', 'Ressources générées par l\'activité', 'Bénéfice net de l\'exercice', 'Dividendes distribués', 'Augmentation de capital', 1),
-(185, 5, 'Que mesure le ratio de rentabilité économique ?', 'Résultat d\'exploitation / Actif économique', 'Résultat net / Capitaux propres', 'Résultat net / Chiffre d\'affaires', 'Dividendes / Capitaux propres', 1),
-(186, 5, 'Quelle est la différence entre charges fixes et charges variables ?', 'Les charges fixes sont indépendantes de l\'activité', 'Les charges fixes varient avec le chiffre d\'affaires', 'Les charges variables sont constantes', 'Il n\'y a pas de différence', 1),
-(187, 5, 'Qu\'est-ce que le seuil de rentabilité ?', 'Niveau d\'activité où le résultat est nul', 'Niveau maximum de production', 'Niveau minimum de ventes', 'Niveau optimal de stock', 1),
-(188, 5, 'Comment calcule-t-on la marge sur coût variable ?', 'Chiffre d\'affaires - Charges variables', 'Chiffre d\'affaires - Charges fixes', 'Résultat net - Impôts', 'Prix de vente - Coût d\'achat', 1),
-(189, 5, 'Qu\'est-ce que l\'effet de levier financier ?', 'Impact de l\'endettement sur la rentabilité', 'Impact des stocks sur la trésorerie', 'Impact des clients sur les ventes', 'Impact des fournisseurs sur les achats', 1),
-(190, 5, 'Que représente le ratio d\'endettement ?', 'Dettes financières / Capitaux propres', 'Dettes totales / Chiffre d\'affaires', 'Charges financières / Résultat', 'Emprunts / Total bilan', 1),
-(191, 5, 'Quelle est la formule de la valeur actuelle nette (VAN) ?', 'Somme des flux actualisés - Investissement initial', 'Investissement initial / Flux de trésorerie', 'Flux de trésorerie / Taux d\'actualisation', 'Résultat net × Taux d\'actualisation', 1),
-(192, 5, 'Qu\'est-ce que le délai de récupération (payback) ?', 'Temps nécessaire pour récupérer l\'investissement', 'Durée de vie du projet', 'Période de remboursement des emprunts', 'Délai de règlement des clients', 1),
-(193, 5, 'Comment calcule-t-on le coût moyen pondéré du capital (CMPC) ?', 'Moyenne pondérée des coûts de financement', 'Coût des emprunts uniquement', 'Coût des capitaux propres uniquement', 'Taux d\'actualisation fixe', 1),
-(194, 5, 'Qu\'est-ce que la rotation des actifs ?', 'Chiffre d\'affaires / Actif total', 'Actif total / Chiffre d\'affaires', 'Résultat / Actif total', 'Actif circulant / Actif total', 1),
-(195, 5, 'Que représente le ratio de couverture des intérêts ?', 'Résultat d\'exploitation / Charges financières', 'Charges financières / Résultat net', 'Emprunts / Charges financières', 'Capitaux propres / Charges financières', 1),
-(196, 5, 'Qu\'est-ce que l\'autofinancement ?', 'CAF - Dividendes distribués', 'Bénéfice net + Dividendes', 'Augmentation de capital', 'Emprunts nouveaux', 1),
-(197, 5, 'Comment calcule-t-on le délai de règlement clients ?', 'Créances clients / CA TTC × 360', 'Créances clients / CA HT × 360', 'CA TTC / Créances clients × 360', 'CA HT / Créances clients × 360', 1),
-(198, 5, 'Qu\'est-ce que la marge brute ?', 'Chiffre d\'affaires - Coût d\'achat des marchandises', 'Chiffre d\'affaires - Charges d\'exploitation', 'Résultat d\'exploitation - Charges financières', 'Résultat net - Impôts', 1),
-(199, 5, 'Que mesure le ratio de liquidité immédiate ?', 'Disponibilités / Dettes à court terme', 'Actif circulant / Dettes à court terme', 'Créances / Dettes à court terme', 'Stocks / Dettes à court terme', 1),
-(200, 5, 'Qu\'est-ce que le fonds de roulement net global (FRNG) ?', 'Ressources stables - Actif immobilisé', 'Actif circulant - Dettes à court terme', 'Capitaux propres - Actif immobilisé', 'Dettes à long terme - Actif immobilisé', 1),
-(201, 5, 'Comment interpréter un ratio de liquidité générale de 1,5 ?', 'L\'entreprise peut honorer ses dettes à court terme', 'L\'entreprise est en difficulté financière', 'L\'entreprise a trop de liquidités', 'L\'entreprise manque de stocks', 1),
-(202, 5, 'Qu\'est-ce que la rentabilité financière ?', 'Résultat net / Capitaux propres', 'Résultat d\'exploitation / Actif total', 'Chiffre d\'affaires / Capitaux propres', 'Dividendes / Capitaux propres', 1),
-(203, 5, 'Que représente l\'indice de profitabilité ?', 'VAN / Investissement initial + 1', 'VAN / Investissement initial', 'Investissement initial / VAN', 'Flux de trésorerie / Investissement', 1),
-(204, 5, 'Qu\'est-ce que le taux de rentabilité interne (TRI) ?', 'Taux qui annule la VAN', 'Taux d\'actualisation du marché', 'Taux de croissance des ventes', 'Taux de marge bénéficiaire', 1),
-(205, 5, 'Comment calcule-t-on la trésorerie nette ?', 'FRNG - BFR', 'Disponibilités - Dettes financières', 'Actif circulant - Passif circulant', 'Capitaux propres - Dettes totales', 1),
-(206, 5, 'Qu\'est-ce que l\'amortissement dégressif ?', 'Méthode d\'amortissement accéléré', 'Amortissement constant chaque année', 'Amortissement basé sur l\'usage', 'Amortissement exceptionnel', 1),
-(207, 5, 'Que représente le coefficient multiplicateur ?', 'Charges fixes / Marge sur coût variable', 'Marge sur coût variable / Charges fixes', 'Chiffre d\'affaires / Charges fixes', 'Charges variables / Charges fixes', 1),
-(208, 5, 'Qu\'est-ce que la valeur comptable d\'une action ?', 'Capitaux propres / Nombre d\'actions', 'Résultat net / Nombre d\'actions', 'Dividende / Nombre d\'actions', 'Chiffre d\'affaires / Nombre d\'actions', 1),
-(209, 5, 'Comment calcule-t-on le délai de règlement fournisseurs ?', 'Dettes fournisseurs / Achats TTC × 360', 'Achats TTC / Dettes fournisseurs × 360', 'Dettes fournisseurs / Achats HT × 360', 'Achats HT / Dettes fournisseurs × 360', 1),
-(210, 5, 'Qu\'est-ce que la provision pour risques et charges ?', 'Passif probable dont l\'échéance est incertaine', 'Réserve de trésorerie', 'Amortissement des immobilisations', 'Créance douteuse', 1),
-(211, 5, 'Que mesure le ratio de rotation des créances ?', 'Rapidité d\'encaissement des créances', 'Niveau des créances irrécouvrables', 'Politique de crédit de l\'entreprise', 'Délai moyen de règlement', 1),
-(212, 5, 'Qu\'est-ce que l\'excédent brut d\'exploitation (EBE) ?', 'Résultat d\'exploitation + Dotations - Reprises', 'Chiffre d\'affaires - Charges d\'exploitation', 'Résultat net + Charges financières', 'Marge commerciale - Charges externes', 1),
-(213, 5, 'Comment interpréter une VAN positive ?', 'Le projet est rentable', 'Le projet n\'est pas rentable', 'Le projet est risqué', 'Le projet est sans intérêt', 1),
-(214, 5, 'Qu\'est-ce que la structure financière optimale ?', 'Équilibre entre capitaux propres et dettes', 'Maximum de capitaux propres', 'Maximum d\'endettement', 'Aucun endettement', 1),
-(215, 5, 'Que représente le ratio de solvabilité générale ?', 'Actif total / Dettes totales', 'Capitaux propres / Dettes totales', 'Trésorerie / Dettes totales', 'Résultat / Dettes totales', 1),
-(216, 5, 'Qu\'est-ce que le risque de change ?', 'Risque lié aux variations de taux de change', 'Risque lié aux taux d\'intérêt', 'Risque lié à la concurrence', 'Risque lié aux clients', 1),
-(217, 5, 'Comment calcule-t-on la rentabilité des ventes ?', 'Résultat net / Chiffre d\'affaires', 'Chiffre d\'affaires / Résultat net', 'Marge brute / Chiffre d\'affaires', 'Charges / Chiffre d\'affaires', 1),
-(218, 5, 'Qu\'est-ce que l\'analyse horizontale du bilan ?', 'Comparaison des exercices successifs', 'Comparaison des postes du même exercice', 'Analyse des ratios', 'Analyse des flux de trésorerie', 1),
-(219, 5, 'Que représente le crédit-bail (leasing) ?', 'Location avec option d\'achat', 'Prêt bancaire classique', 'Augmentation de capital', 'Subvention d\'investissement', 1),
-(220, 5, 'Qu\'est-ce que la marge de sécurité ?', 'CA réalisé - CA au seuil de rentabilité', 'Charges fixes - Charges variables', 'Résultat net - Impôts', 'Actif - Passif', 1),
-(221, 5, 'Comment calcule-t-on le taux de croissance interne ?', 'Taux d\'autofinancement × Rentabilité économique', 'Résultat net / CA de l\'année précédente', 'CAF / Investissement', 'Dividendes / Capitaux propres', 1),
-(222, 5, 'Qu\'est-ce que l\'actualisation ?', 'Technique pour ramener les flux futurs en valeur actuelle', 'Calcul de l\'inflation', 'Évaluation des stocks', 'Calcul des amortissements', 1),
-(223, 5, 'Que représente l\'actif économique ?', 'Actif immobilisé + BFR', 'Actif total - Passif total', 'Immobilisations corporelles uniquement', 'Capitaux propres + Dettes financières', 1),
-(224, 5, 'Qu\'est-ce que la politique de dividende ?', 'Décision de distribution des bénéfices', 'Politique d\'investissement', 'Politique de financement', 'Politique commerciale', 1),
-(225, 5, 'Comment calculer le point mort en quantité ?', 'Charges fixes / Marge unitaire sur coût variable', 'Charges variables / Prix de vente unitaire', 'Chiffre d\'affaires / Coût unitaire', 'Marge brute / Charges totales', 1),
-(226, 5, 'Qu\'est-ce que la gestion de trésorerie ?', 'Optimisation des flux de liquidités', 'Gestion des stocks', 'Gestion des clients', 'Gestion des fournisseurs', 1),
-(227, 5, 'Que mesure le ratio de charges financières ?', 'Charges financières / Chiffre d\'affaires', 'Chiffre d\'affaires / Charges financières', 'Charges financières / Résultat net', 'Emprunts / Charges financières', 1),
-(228, 5, 'Qu\'est-ce que l\'escompte de règlement ?', 'Réduction accordée pour paiement anticipé', 'Intérêt sur découvert', 'Commission bancaire', 'Frais de recouvrement', 1),
-(229, 5, 'Comment interpréter un BFR négatif ?', 'Les dettes fournisseurs financent l\'exploitation', 'L\'entreprise manque de liquidités', 'Les stocks sont trop importants', 'Les créances sont trop élevées', 1),
-(230, 5, 'Qu\'est-ce que la cession-bail (lease-back) ?', 'Vente puis location du même bien', 'Achat puis revente immédiate', 'Location simple', 'Crédit-bail classique', 1),
-(231, 5, 'Que représente le ratio de marge nette ?', 'Résultat net / Chiffre d\'affaires', 'Marge brute / Chiffre d\'affaires', 'EBE / Chiffre d\'affaires', 'Résultat d\'exploitation / Chiffre d\'affaires', 1);
+(354, 5, 'Combien de pays compte l\'OHADA', '5', '16', '20', '17', 4),
+(353, 4, 'Quelle est la caractéristique principale d\'une base de données NoSQL ?', 'Utilisation exclusive de SQL', 'Schéma fixe et rigide', 'Flexibilité du schéma et scalabilité horizontale', 'Structure uniquement tabulaire', 3),
+(351, 4, 'L\'intégrité référentielle garantit la validité des :', 'Sauvegardes', 'Relations entre les tables', 'Performances', 'Accès concurrents', 2),
+(352, 4, 'Un trigger (déclencheur) s\'exécute automatiquement en réponse à un :', 'Redémarrage du serveur', 'Événement spécifique sur la base', 'Lancement d\'une application', 'Accès à un fichier', 2),
+(349, 4, 'Une vue en SQL est une :', 'Table physique', 'Copie de données', 'Table virtuelle', 'Fonction de tri', 3),
+(350, 4, 'Quel type de base de données est le plus adapté aux données non structurées ?', 'Relationnelle', 'Hiérarchique', 'NoSQL', 'Orientée objet', 3),
+(348, 4, 'La persistance des données signifie que les données :', 'Sont protégées contre les virus', 'Restent disponibles après l\'arrêt du programme', 'Peuvent être compressées', 'Sont uniquement en lecture', 2),
+(344, 4, 'Quelle commande SQL insère de nouvelles lignes ?', 'UPDATE', 'ADD', 'INSERT INTO', 'CREATE', 3),
+(345, 4, 'Pour modifier des données existantes, on utilise la commande SQL :', 'ALTER TABLE', 'UPDATE', 'MODIFY', 'CHANGE', 2),
+(346, 4, 'La commande SQL pour supprimer des enregistrements est :', 'REMOVE', 'DROP', 'DELETE FROM', 'ERASE', 3),
+(347, 4, 'Qu\'est-ce qu\'une transaction en base de données ?', 'Une seule instruction SQL', 'Un groupe d\'opérations exécutées comme une seule unité', 'Un rapport d\'activité', 'Une procédure stockée', 2),
+(342, 4, 'Quel est le rôle d\'un index dans une base de données ?', 'Garantir l\'intégrité des données', 'Améliorer la vitesse de recherche', 'Définir la structure des tables', 'Créer des vues', 2),
+(343, 4, 'DDL est utilisé pour :', 'Modifier les données', 'Définir la structure de la base', 'Interroger les données', 'Manipuler les enregistrements', 2),
+(340, 4, 'Que signifie l\'acronyme ACID pour les transactions ?', 'Access, Control, Integrity, Durability', 'Atomicity, Consistency, Isolation, Durability', 'Analysis, Classification, Indexing, Data', 'Application, Connection, Isolation, Data', 2),
+(341, 4, 'La normalisation d\'une base de données vise principalement à :', 'Accélérer les requêtes', 'Réduire la redondance des données', 'Simplifier les sauvegardes', 'Augmenter la taille de la base', 2),
+(339, 4, 'Pour combiner des lignes de plusieurs tables en SQL, on utilise une :', 'Union', 'Jointure', 'Intersection', 'Sous-requête', 2),
+(337, 4, 'Qu\'est-ce qu\'une clé primaire ?', 'Un attribut permettant d\'identifier une relation', 'Un identifiant unique pour chaque enregistrement', 'Une colonne qui stocke des dates', 'Un lien vers une autre table', 2),
+(338, 4, 'Le rôle d\'une clé étrangère est d\'établir une :', 'Sécurité des données', 'Liaison entre deux tables', 'Indexation rapide', 'Validation des entrées', 2),
+(336, 4, 'Quel langage est standard pour interroger une base de données relationnelle ?', 'Python', 'Java', 'C#', 'SQL', 4),
+(334, 4, 'Quel est l\'objectif principal d\'un SGBD ?', 'Gérer les transactions financières', 'Organiser et manipuler les données', 'Développer des applications web', 'Sécuriser les réseaux', 2),
+(335, 4, 'Dans une base de données relationnelle, les données sont organisées en :', 'Listes', 'Documents', 'Tables', 'Fichiers XML', 3),
+(313, 5, 'Qu\'est-ce que l\'analyse de sensibilité en finance ?', 'L\'étude de l\'impact des variations de paramètres', 'L\'analyse des sentiments du marché', 'L\'étude de la concurrence', 'L\'analyse des risques uniquement', 1),
+(312, 5, 'Comment s\'appelle le coût des capitaux propres ?', 'Coût de l\'endettement', 'Taux de rentabilité exigé par les actionnaires', 'Taux d\'intérêt bancaire', 'Coût des ventes', 2),
+(311, 5, 'Qu\'est-ce qu\'une cession d\'actif ?', 'L\'achat d\'une immobilisation', 'La vente d\'un élément d\'actif', 'Une provision', 'Un amortissement', 2),
+(310, 5, 'Quelle est la formule du délai de recouvrement des créances ?', 'Créances clients / (CA TTC / 360)', 'CA / Créances clients', 'Créances / CA HT', 'CA TTC / Créances', 1),
+(309, 5, 'Qu\'est-ce que la valeur comptable d\'une action ?', 'Capitaux propres / Nombre d\'actions', 'Prix de marché de l\'action', 'Dividende par action', 'Bénéfice par action', 1),
+(308, 5, 'Comment calcule-t-on le ratio de liquidité réduite ?', '(Actif circulant - Stocks) / Dettes à court terme', 'Trésorerie / Dettes totales', 'Stocks / Actif circulant', 'Créances / Dettes', 1),
+(307, 5, 'Qu\'est-ce qu\'un tableau de financement ?', 'Un document expliquant l\'évolution financière', 'Un budget prévisionnel', 'Un contrat de prêt', 'Un relevé bancaire', 1),
+(306, 5, 'Quelle est la différence entre amortissement linéaire et dégressif ?', 'Le linéaire est constant, le dégressif décroissant', 'Le dégressif est constant, le linéaire croissant', 'Il n\'y a pas de différence', 'Seul le linéaire est autorisé', 1),
+(305, 5, 'Qu\'est-ce que la rentabilité des ventes ?', 'Résultat net / Chiffre d\'affaires', 'Chiffre d\'affaires / Actif total', 'Capitaux propres / Résultat net', 'Dettes / Chiffre d\'affaires', 1),
+(304, 5, 'Comment appelle-t-on le financement par émission d\'actions ?', 'Financement par capitaux propres', 'Financement par endettement', 'Financement mixte', 'Autofinancement', 1),
+(303, 5, 'Qu\'est-ce qu\'un découvert bancaire ?', 'Une facilité de trésorerie temporaire', 'Un prêt à long terme', 'Une subvention', 'Un investissement', 1),
+(302, 5, 'Quelle est la formule du ratio de rotation des stocks ?', 'Coût d\'achat des marchandises vendues / Stock moyen', 'Stock / Chiffre d\'affaires', 'Chiffre d\'affaires / Stock', 'Stock / Coût d\'achat', 1),
+(301, 5, 'Qu\'est-ce que la politique de dividendes ?', 'La stratégie de distribution des bénéfices', 'La stratégie d\'investissement', 'La stratégie commerciale', 'La stratégie de production', 1),
+(300, 5, 'Comment s\'appelle le risque lié à l\'endettement ?', 'Risque commercial', 'Risque financier', 'Risque opérationnel', 'Risque technique', 2),
+(299, 5, 'Qu\'est-ce qu\'une provision ?', 'Une réserve obligatoire', 'Une charge probable mais incertaine', 'Un bénéfice futur', 'Un investissement', 2),
+(298, 5, 'Que signifie EBITDA ?', 'Résultat avant intérêts, impôts, dotations et amortissements', 'Résultat net après impôts', 'Chiffre d\'affaires hors taxes', 'Capitaux propres', 1),
+(297, 5, 'Qu\'est-ce qu\'un budget de trésorerie ?', 'Un plan comptable', 'Un tableau prévisionnel des encaissements et décaissements', 'Un contrat bancaire', 'Un bilan prévisionnel', 2),
+(296, 5, 'Comment calcule-t-on la marge sur coût variable ?', 'Chiffre d\'affaires - charges variables', 'Charges fixes - charges variables', 'Résultat net - charges fixes', 'Actif - passif', 1),
+(295, 5, 'Qu\'est-ce que le point mort (seuil de rentabilité) ?', 'Le niveau de ventes où l\'entreprise ne fait ni profit ni perte', 'Le moment de fermeture de l\'entreprise', 'Le montant maximum de ventes', 'Le bénéfice minimum requis', 1),
+(294, 5, 'Quelle est la différence entre charges fixes et charges variables ?', 'Les fixes ne changent jamais', 'Les fixes sont indépendantes du volume d\'activité', 'Les variables sont plus importantes', 'Il n\'y a pas de différence', 2),
+(292, 5, 'Comment appelle-t-on les dividendes non distribués ?', 'Réserves', 'Provisions', 'Charges', 'Produits', 1),
+(293, 5, 'Qu\'est-ce qu\'une augmentation de capital ?', 'Une diminution des dettes', 'Un apport de nouveaux fonds par les associés', 'Une distribution de dividendes', 'Un remboursement d\'emprunt', 2),
+(291, 5, 'Qu\'est-ce que la structure financière optimale ?', '100% de capitaux propres', '100% de dettes', 'L\'équilibre qui minimise le coût du capital', '50% de capitaux propres et 50% de dettes', 3),
+(290, 5, 'Que représente le fonds de roulement ?', 'Les stocks de l\'entreprise', 'La différence entre ressources stables et emplois stables', 'La trésorerie disponible', 'Les créances clients', 2),
+(289, 5, 'Qu\'est-ce qu\'un crédit-bail (leasing) ?', 'Un prêt bancaire classique', 'Une location avec option d\'achat', 'Une subvention publique', 'Un découvert bancaire', 2),
+(288, 5, 'Quelle est la formule du ratio d\'endettement ?', 'Dettes / Capitaux propres', 'Capitaux propres / Dettes', 'Dettes / Total bilan', 'Actif / Passif', 1),
+(287, 5, 'Qu\'est-ce que le taux de rentabilité interne (TRI) ?', 'Le taux d\'intérêt bancaire', 'Le taux qui annule la VAN', 'Le taux de croissance', 'Le taux d\'inflation', 2),
+(286, 5, 'Comment calcule-t-on le délai de récupération d\'un investissement ?', 'Investissement / Cash-flow annuel moyen', 'Cash-flow / Investissement', 'Résultat net / Investissement', 'Chiffre d\'affaires / Investissement', 1),
+(285, 5, 'Qu\'est-ce que la valeur actualisée nette (VAN) ?', 'La valeur comptable d\'un investissement', 'La différence entre les flux actualisés et l\'investissement initial', 'Le montant de l\'investissement', 'Le taux de rentabilité', 2),
+(284, 5, 'Quelle est la principale caractéristique d\'une action ?', 'Elle garantit un revenu fixe', 'Elle donne droit à une part des bénéfices', 'Elle a une durée limitée', 'Elle ne peut pas être vendue', 2),
+(283, 5, 'Qu\'est-ce qu\'une obligation ?', 'Un titre de propriété', 'Un titre de créance', 'Un contrat commercial', 'Un placement bancaire', 2),
+(282, 5, 'Comment s\'appelle le coût moyen pondéré du capital ?', 'CMPC ou WACC', 'ROI', 'EVA', 'EBITDA', 1),
+(281, 5, 'Que signifie ROE (Return on Equity) ?', 'Rentabilité des ventes', 'Rentabilité des investissements', 'Rentabilité des capitaux propres', 'Rentabilité du personnel', 3),
+(280, 5, 'Qu\'est-ce qu\'un plan de financement ?', 'Un document comptable obligatoire', 'Un tableau prévisionnel des ressources et emplois', 'Un contrat avec les banques', 'Un état de la trésorerie', 2),
+(279, 5, 'Quelle est la différence entre rentabilité économique et rentabilité financière ?', 'Il n\'y a pas de différence', 'La rentabilité économique concerne l\'actif, la financière les capitaux propres', 'La rentabilité économique est toujours supérieure', 'Seule la rentabilité financière compte', 2),
+(278, 5, 'Qu\'est-ce que l\'effet de levier financier ?', 'L\'augmentation du capital social', 'L\'utilisation de l\'endettement pour améliorer la rentabilité', 'La diminution des coûts de production', 'L\'augmentation du chiffre d\'affaires', 2),
+(277, 5, 'Comment calcule-t-on la capacité d\'autofinancement (CAF) ?', 'Résultat net + dotations aux amortissements', 'Chiffre d\'affaires - charges', 'Actif - Passif', 'Produits financiers - charges financières', 1),
+(276, 5, 'Qu\'est-ce qu\'un cash-flow ?', 'Le chiffre d\'affaires de l\'entreprise', 'Les flux de trésorerie générés par l\'activité', 'Les investissements réalisés', 'Les emprunts contractés', 2),
+(275, 5, 'Quelle est la formule du ratio de liquidité générale ?', 'Actif circulant / Dettes à court terme', 'Trésorerie / Dettes totales', 'Capitaux propres / Total actif', 'Résultat net / Chiffre d\'affaires', 1),
+(274, 5, 'Que représente le besoin en fonds de roulement (BFR) ?', 'Les investissements en immobilisations', 'Le financement permanent de l\'entreprise', 'Le décalage entre les encaissements et décaissements d\'exploitation', 'La trésorerie disponible', 3),
+(273, 5, 'Qu\'est-ce que le capital social d\'une entreprise ?', 'L\'ensemble des dettes de l\'entreprise', 'Les apports des associés ou actionnaires', 'Le chiffre d\'affaires annuel', 'Les bénéfices accumulés', 2);
 
 -- --------------------------------------------------------
 

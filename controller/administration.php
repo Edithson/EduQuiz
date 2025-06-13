@@ -276,12 +276,12 @@ function question($input)
         $ma_matiere = htmlspecialchars($_POST['matiere']);
         if (isset($_POST['int']) && isset($_POST['p1']) && isset($_POST['p2']) && isset($_POST['p3']) && isset($_POST['p4']) && isset($_POST['rep']) && !empty($_POST['int']) && !empty($_POST['p1']) && !empty($_POST['p2']) && !empty($_POST['p3']) && !empty($_POST['p4']) && !empty($_POST['rep'])) {
             $ma_matiere = htmlspecialchars($_POST['matiere']);
-            $intitule = htmlspecialchars($_POST['int']);
-            $p1 = htmlspecialchars($_POST['p1']);
-            $p2 = htmlspecialchars($_POST['p2']);
-            $p3 = htmlspecialchars($_POST['p3']);
-            $p4 = htmlspecialchars($_POST['p4']);
-            $rep = htmlspecialchars($_POST['rep']);
+            $intitule = ($_POST['int']);
+            $p1 = ($_POST['p1']);
+            $p2 = ($_POST['p2']);
+            $p3 = ($_POST['p3']);
+            $p4 = ($_POST['p4']);
+            $rep = ($_POST['rep']);
             $qt = new Question();
             $qt->create($ma_matiere, $intitule, $p1, $p2, $p3, $p4, $rep);
             $msg = "enregistrement ok";
@@ -296,9 +296,9 @@ function question($input)
             $id = htmlspecialchars($_POST['id']);
             $ma_matiere = htmlspecialchars($_POST['matiere']);
             $intitule = ($_POST['int']);
-            $p1 = htmlspecialchars($_POST['p1']);
-            $p2 = htmlspecialchars($_POST['p2']);
-            $p3 = htmlspecialchars($_POST['p3']);
+            $p1 = ($_POST['p1']);
+            $p2 = ($_POST['p2']);
+            $p3 = ($_POST['p3']);
             $p4 = ($_POST['p4']);
             $rep = htmlspecialchars($_POST['rep']);
             $qt = new Question();

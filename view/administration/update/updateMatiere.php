@@ -67,11 +67,12 @@ $matieres = $matieres->fetch();
         }
         ?></div><br><br>
 
-    <input type="submit" value="Mettre à jour" name="update">
+    <input type="submit" value="Mettre à jour" name="update"><br>
     <button id="hide">Annuler</button>
 
     <script>
         document.getElementById('hide').addEventListener('click', function(e){
-            window.location.reload();
+            var path = 'index.php?path=matiere';
+            window.location.href = path;
         })
     </script>

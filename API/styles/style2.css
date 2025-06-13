@@ -302,3 +302,10 @@ a{
     transform: translate(3%);
     margin-top: 50px;
 }
+
+#end_btn{
+    position: relative;
+    display: block;
+    width: 260px;
+    margin: 0 auto;
+}

@@ -83,8 +83,8 @@ require_once('view/layout/nav_bar.php');
                     ?></div><br>
     
                     <input type="submit" value="valider" name="valider">
-                    <button id="hide">Annuler</button>
                 </form>
+                <button id="hide">Annuler</button>
             </div>
         </section>
 

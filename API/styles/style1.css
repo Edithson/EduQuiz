@@ -240,3 +240,11 @@ li{
     margin-top: -100px;
     margin-left: 5px;
 }
+
+
+#end_btn{
+    position: relative;
+    display: block;
+    width: 260px;
+    margin: 0 auto;
+}

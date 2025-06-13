@@ -372,17 +372,17 @@ a{
     top: 50%;
     transform: translateY(-50%);
 }
-/* 
-.add_question {
+
+.user_form {
     max-height: 70vh;
     overflow-y: auto;
 }
 
 Personnalisation de la barre de défilement
-.add_question::-webkit-scrollbar {
+.user_form::-webkit-scrollbar {
     width: 8px;
 }
-*/
+
 
 #compte_action{
     width: auto;

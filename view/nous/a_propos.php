@@ -117,7 +117,7 @@ require_once('view/layout/nav_bar.php');
         </div>
 
         <div class="cta-section">
-            <a href="index.html" class="cta-button">Découvrir EduQuiz 🚀</a>
+            <a href="index.php" class="cta-button">Découvrir EduQuiz 🚀</a>
         </div>
     </div>
 

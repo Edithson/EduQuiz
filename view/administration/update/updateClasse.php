@@ -75,13 +75,12 @@ $classes = $classes->fetch();
         $i++;
     }
     ?></div><br>
-    <input type="submit" value="Mettre à jour" name="update">
-    <button id="hide">Annuler</button>
+    <input type="submit" value="Mettre à jour" name="update"><br>
     <script>
         document.getElementById('hide').addEventListener('click', function(e){
-            e.preventDefault()
             document.getElementById('drap').style.display='none';
-            window.location.reload();
+            var path = 'index.php?path=classe';
+            window.location.href = path;
         })
     </script>
     <?php
